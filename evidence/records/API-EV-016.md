@@ -1,0 +1,17 @@
+# API-EV-016 — Research evidence summary
+
+**Finding (sanitized extract):** Homebridge uses GET device, meshes, topology-with-ID, POST graph2 and GET timer programs
+
+**Evidence classification:** THIRD-PARTY OBSERVED  
+**Provenance:** EXPLICIT_CLAIM_FIELD / EXPLICIT_LEDGER_CLASS  
+**Direct model operation references:** No direct operation mapping in the frozen machine-readable model.
+
+**Boundaries:** network_topologies without ID not observed
+
+## Revision-pinned third-party source references (independence not implied)
+
+- [Pinned public source 1](https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L69-L315)
+
+**Publication caveat:** This is a minimal public derivative of a private research ledger entry, not a copy of the underlying authenticated response, a complete reproduction of the original entry or a vendor certification. Classification transcribed from the private ledger.
+
+[All evidence records](../research-index.md) · [REST/WS mapping](../operation-evidence-crosswalk.md)

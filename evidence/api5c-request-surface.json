@@ -1,0 +1,642 @@
+{
+  "schema": "api5c-request-surface-map-v1",
+  "prepared_date": "2026-10-29",
+  "baseline_ref": "api-5b-zone-report",
+  "source_documents": [
+    "docs/api/api5a-rest-auth-inventory.md",
+    "docs/api/api5a-websocket-resource-graph.md",
+    "docs/api/api5a-reconciliation.md",
+    "docs/api/api4-results.md",
+    "docs/api/source-evidence.md"
+  ],
+  "notes": [
+    "A2 and A3 row coverage follows client-source constructions and historical bounded operator reports; not a live vendor schema.",
+    "HTTP entries expand A2-E01..E18 into separate method and path combinations. WebSocket entries preserve all A3-E01..E25 including grouped A3-E14.",
+    "B3 first-party Location observed once; no S3 object GET performed. No target fetch, control frames, POST graph2 or controller mutation is authorized by this map.",
+    "A legal/technical request may involve variants not represented in the reviewed sources; this map is not an exhaustive enumeration of all Orbit endpoints.",
+    "Supplemental A4/earlier evidence beyond A2/A3 core adds REST landscape-description PUT (API-EV-017) and three named WS handled events (API-EV-058/024); these are source-only.",
+    "Operator-reported C1 API-EV-061: 7 first-party requests including login, all six GETs HTTP 200; event-log page-size variations did not alter per-page result arrays (100 on page 1; 0 on page 2), program unfiltered/filtered full JSON equal (5). C1 once-only consent consumed. Does not establish general paging, cap, filter semantics or archive completeness.",
+    "C2 API-EV-062: one owner-authorized login POST and five first-party account-scoped devices GETs (6 physical requests; 0 target requests). Login API key present, session token absent, token-only request skipped. Origin/Referer/configured-User-Agent single omissions had HTTP 200 and baseline-identical arrays; App-ID omission HTTP 401. C2 one-run authorization consumed; no universal header/token conclusions.",
+    "API-EV-063 (C3 one authorized run, operator reported): 16 physical requests, 6 REST pages to empty, 68 containers, first-page recheck unchanged; selected Aug 6-8 had 21 REST irrigation events. Aug 7 REST/asset 21/21 agreement with 0 recognized conflicts; Aug 6/8 acquired assets contained explicit watering_events null and are inconclusive (not zero). One-run C3 authorization consumed. Retention/versioning and prior Aug 7 null discrepancy still unresolved; zone-report S3 access remains forbidden.",
+    "API-EV-065 (C3G operator-reported live and offline outcomes): one authorized 8-day private decoded daily-asset capture used 19/19 allowed physical requests and saved 8 JSON + 8 SHA-256 sidecars; C3F no-network offline audit reported all 8 local pairs VERIFIED, 6 populated irrigation arrays (72 entries total) and 2 EXPLICIT_NULL assets on the operator's Aug 6/8 no-watering controls. This is day-level consistency, not independent event-count or historical object-version proof; null is still structurally unknown, not zero. C3G one-run live permission consumed; no new zone S3 allowlist. The REST-17/18 row evidence_addendum remains API-EV-063 to preserve earlier source-traceability regression expectations; API-EV-065 is this additional sample.",
+    "API-EV-070 (C4-E operator-reported bounded first-party REST): the previously inventoried but NOT_TESTED_ID_MISSING REST-09 GET /v1/meshes/{mesh_id} returned HTTP 200 JSON object after one authorized login and eight-local-archive selector preflight. Only id, devices and created_at top-level keys present among seven fixed keys; devices is an array, content and length not assessed. Top-level mesh_id, name, network_topology_id, updated_at absent. Returned id equality to requested mesh and selected device membership not checked. 2/2 physical HTTP requests used; no retries, redirects, raw persistence or further live consent. Historical observation preserved; census unchanged."
+  ],
+  "counts": {
+    "rest_entries": 27,
+    "websocket_entries": 28
+  },
+  "http": [
+    {
+      "id": "REST-01",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/session",
+      "evidence_id": "A2-E01",
+      "risk": "AUTH_EXCHANGE",
+      "observation": "OPERATOR_200",
+      "gap": "session field variants; API key vs session token; app-id-dependent claims",
+      "gate": "OBSERVE_AUTH_OFFLINE_FIRST"
+    },
+    {
+      "id": "REST-02",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/devices",
+      "evidence_id": "A2-E02",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C2 operator report: API-key baseline and individual configured Origin/Referer/User-Agent omissions each HTTP 200, identical full one-device arrays; Orbit-App-Id omission HTTP 401; no session token issued. Other account/header/app-ID profiles remain unknown (API-EV-062)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-062"
+    },
+    {
+      "id": "REST-03",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/devices/{device_id}",
+      "evidence_id": "A2-E03",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "device fields not fully characterized",
+      "gate": "SAFE_GET_PROPOSAL"
+    },
+    {
+      "id": "REST-04",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/watering_events/{device_id}",
+      "evidence_id": "A2-E04",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C3 operator report: 6 pages to EMPTY_PAGE, 68 REST containers, first-page SAME_PAYLOAD, valid structure, 21 irrigation events on Aug 6-8; whole-history completeness, later-page stability and retention remain unverified (API-EV-063)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-063"
+    },
+    {
+      "id": "REST-05",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/sprinkler_timer_programs",
+      "evidence_id": "A2-E05",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C1 operator report: unfiltered and device_id-filtered responses identical full 5-item arrays for one device; ignored filter versus all-programs-for-device unresolved (API-EV-061)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-061"
+    },
+    {
+      "id": "REST-06",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/landscape_descriptions/{device_id}",
+      "evidence_id": "A2-E06",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "array shape partial; t query parameter",
+      "gate": "SAFE_GET_PROPOSAL"
+    },
+    {
+      "id": "REST-07",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/zone_reports/{device_id}",
+      "evidence_id": "A2-E07",
+      "risk": "REDIRECT_SOURCE",
+      "observation": "OPERATOR_302",
+      "gap": "S3 unpinned variant; 4 opaque/device path segments; unknown query keys; no target fetch",
+      "gate": "FIRST_PARTY_DONE_NO_TARGET"
+    },
+    {
+      "id": "REST-08",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/event_logs/{device_id}",
+      "evidence_id": "A2-E08",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C1 operator report: page 1 identical 100-item arrays at per-page=10/50; page 2 identical empty arrays; server cap, total, ordering and retention unknown (API-EV-061)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-061"
+    },
+    {
+      "id": "REST-09",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/meshes/{mesh_id}",
+      "evidence_id": "A2-E09",
+      "risk": "READ",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "mesh identifier not operator-authorized/available",
+      "gate": "NEED_AUTHORIZED_ID",
+      "latest_live_observation": {
+        "evidence_id": "API-EV-070",
+        "provenance": "OPERATOR_REPORTED_BOUNDED_LIVE_FIRST_PARTY_REST",
+        "observation": "HTTP_200",
+        "endpoint": "GET /v1/meshes/{private_mesh_id}",
+        "response_media_type": "application/json",
+        "top_level_json": "OBJECT",
+        "top_level_keys_present": [
+          "id",
+          "devices",
+          "created_at"
+        ],
+        "devices_value_kind": "ARRAY",
+        "top_level_keys_absent": [
+          "mesh_id",
+          "name",
+          "network_topology_id",
+          "updated_at"
+        ],
+        "physical_http_requests_total_including_login": 2,
+        "one_run_authorization": "CONSUMED",
+        "mesh_id_value_matches_request": "NOT_COMPARED",
+        "selected_controller_in_returned_devices": "NOT_ASSESSED",
+        "raw_response_retained": false,
+        "scope_limit": "ONE_SELECTED_MESH_ONE_ACCOUNT_ONE_SESSION"
+      },
+      "observation_historical_note": "Prior NOT_TESTED_ID_MISSING is retained as API-4 baseline. Latest one-shot mesh GET outcome is HTTP 200 (API-EV-070)."
+    },
+    {
+      "id": "REST-10",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/network_topologies/{topology_id}",
+      "evidence_id": "A2-E09",
+      "risk": "READ",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "topology identifier not operator-authorized/available",
+      "gate": "NEED_AUTHORIZED_ID"
+    },
+    {
+      "id": "REST-11",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/users/{user_id}",
+      "evidence_id": "A2-E10",
+      "risk": "READ_SENSITIVE",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "user identifier/privacy and response schema unknown",
+      "gate": "NEED_AUTHORIZED_ID"
+    },
+    {
+      "id": "REST-12",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/user_feedback?user_id={user_id}",
+      "evidence_id": "A2-E10",
+      "risk": "READ_SENSITIVE",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "user feedback contains potentially private content",
+      "gate": "NEED_AUTHORIZED_ID"
+    },
+    {
+      "id": "REST-13",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/landscapes",
+      "evidence_id": "A2-E11",
+      "risk": "READ",
+      "observation": "OPERATOR_404",
+      "gap": "404 for one session; dashboard local [] fallback not vendor observation",
+      "gate": "SAFE_GET_PROPOSAL"
+    },
+    {
+      "id": "REST-14",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/weather_forecast/{device_id}",
+      "evidence_id": "A2-E11",
+      "risk": "READ",
+      "observation": "OPERATOR_404",
+      "gap": "404 for one session; context and route variants unknown",
+      "gate": "SAFE_GET_PROPOSAL"
+    },
+    {
+      "id": "REST-15",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/bhyve_accounts/{account_id}",
+      "evidence_id": "A2-E12",
+      "risk": "READ_SENSITIVE",
+      "observation": "OPERATOR_200",
+      "gap": "account shape incomplete; restrict to own account",
+      "gate": "SAFE_GET_PROPOSAL"
+    },
+    {
+      "id": "REST-16",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/bhyve_accounts/{account_id}/devices",
+      "evidence_id": "A2-E12",
+      "risk": "READ_SENSITIVE",
+      "observation": "OPERATOR_404",
+      "gap": "404 for one account despite code fallback",
+      "gate": "SAFE_GET_PROPOSAL"
+    },
+    {
+      "id": "REST-17",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/device_assets/{device_id}",
+      "evidence_id": "A2-E13",
+      "risk": "SIGNED_ASSET_INDEX",
+      "observation": "OPERATOR_200",
+      "gap": "C3 operator report: authenticated daily asset index AVAILABLE, all three fixed Aug 6/7/8 dates indexed/retrieved; index longevity and revisions remain unknown (API-EV-063)",
+      "gate": "EXISTING_PATH_ONLY",
+      "evidence_addendum": "API-EV-063"
+    },
+    {
+      "id": "REST-18",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/device_assets/{device_id}/{yyyymmdd}",
+      "evidence_id": "A2-E13",
+      "risk": "SIGNED_DAILY_ASSET",
+      "observation": "OPERATOR_302_TO_VERIFIED_S3",
+      "gap": "C3 operator report: existing validated daily-device-asset policy yielded Aug 7 21 matched irrigations; Aug 6/8 AVAILABLE documents had EXPLICIT_NULL watering_events (unknown, not zero). No zone target and no general signed-link allowlist expansion (API-EV-063)",
+      "gate": "EXISTING_PATH_ONLY",
+      "evidence_addendum": "API-EV-063"
+    },
+    {
+      "id": "REST-19",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/graph2",
+      "evidence_id": "A2-E14",
+      "risk": "MUTATION_UNKNOWN",
+      "observation": "SOURCE_ONLY",
+      "gap": "graph-shaped query POST could be stateful; response not verified",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-20",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/sprinkler_timer_programs",
+      "evidence_id": "A2-E15",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "program creation and state modification",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-21",
+      "transport": "HTTP",
+      "method": "PUT",
+      "path": "/v1/sprinkler_timer_programs/{program_id}",
+      "evidence_id": "A2-E15",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "program modification",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-22",
+      "transport": "HTTP",
+      "method": "DELETE",
+      "path": "/v1/sprinkler_timer_programs/{program_id}",
+      "evidence_id": "A2-E15",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "program deletion",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-23",
+      "transport": "HTTP",
+      "method": "PUT",
+      "path": "/v1/devices/{device_id}",
+      "evidence_id": "A2-E16",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "rain-delay / device body variants across clients",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-24",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/devices/{device_id}/rain_delay",
+      "evidence_id": "A2-E17",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "distinct REST rain-delay route",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-25",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/devices/{device_id}/manual_watering",
+      "evidence_id": "A2-E18",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "start watering; device action",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-26",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/devices/{device_id}/stop",
+      "evidence_id": "A2-E18",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "stop watering; device action",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "REST-27",
+      "transport": "HTTP",
+      "method": "PUT",
+      "path": "/v1/landscape_descriptions/{landscape_id}",
+      "evidence_id": "API-EV-017",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "landscape_description payload shape from dependent client; no server write result",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    }
+  ],
+  "websocket": [
+    {
+      "id": "WS-01",
+      "transport": "WEBSOCKET",
+      "event": "app_connection",
+      "direction": "OUTBOUND_AUTH",
+      "evidence_id": "A3-E01",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "ws credential accepted/ack not established",
+      "gate": "WS_APPROVAL_REQUIRED"
+    },
+    {
+      "id": "WS-02",
+      "transport": "WEBSOCKET",
+      "event": "ping",
+      "direction": "OUTBOUND_KEEPALIVE",
+      "evidence_id": "A3-E02",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "JSON ping distinct from RFC6455 PING",
+      "gate": "WS_APPROVAL_REQUIRED"
+    },
+    {
+      "id": "WS-03",
+      "transport": "WEBSOCKET",
+      "event": "pong",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E03",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "application JSON pong not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-04",
+      "transport": "WEBSOCKET",
+      "event": "change_mode",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E04",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "changes controller mode; no command execution",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-05",
+      "transport": "WEBSOCKET",
+      "event": "change_mode",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E05",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "notification not acknowledgement",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-06",
+      "transport": "WEBSOCKET",
+      "event": "rain_delay",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E06",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "may change watering policy; distinct REST methods",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-07",
+      "transport": "WEBSOCKET",
+      "event": "rain_delay",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E07",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "notification not acknowledgement",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-08",
+      "transport": "WEBSOCKET",
+      "event": "watering_in_progress_notification",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E08",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "fields/types/ordering unverified",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-09",
+      "transport": "WEBSOCKET",
+      "event": "watering_complete",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E09",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "server delivery not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-10",
+      "transport": "WEBSOCKET",
+      "event": "skip_active_station",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E10",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "no identified paired send",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-11",
+      "transport": "WEBSOCKET",
+      "event": "program_changed",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E11",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "not an acknowledgement of program_save",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-12",
+      "transport": "WEBSOCKET",
+      "event": "device_idle",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E12",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "server delivery not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-13",
+      "transport": "WEBSOCKET",
+      "event": "device_connected",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E13",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "server delivery not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-14",
+      "transport": "WEBSOCKET",
+      "event": "battery_status/device_status/fault",
+      "direction": "INBOUND_HANDLED_GROUP",
+      "evidence_id": "A3-E14",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "three source-defined candidate names grouped by A3",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-15",
+      "transport": "WEBSOCKET",
+      "event": "clear_low_battery",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E15",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "handler alone not server evidence",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-16",
+      "transport": "WEBSOCKET",
+      "event": "sync",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E16",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "not proven passive; can trigger device state",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-17",
+      "transport": "WEBSOCKET",
+      "event": "fs_identify",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E17",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "explicit device action",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-18",
+      "transport": "WEBSOCKET",
+      "event": "set_manual_preset_runtime",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E18",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "vendored source only; state change",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-19",
+      "transport": "WEBSOCKET",
+      "event": "program_list",
+      "direction": "OUTBOUND_UNPROVEN_READ",
+      "evidence_id": "A3-E19",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "client placeholder [] not vendor response; could trigger action",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-20",
+      "transport": "WEBSOCKET",
+      "event": "program_save",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E20",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "create/update program",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-21",
+      "transport": "WEBSOCKET",
+      "event": "program_delete",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E21",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "delete program",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-22",
+      "transport": "WEBSOCKET",
+      "event": "program_enable",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E22",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "enable program",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-23",
+      "transport": "WEBSOCKET",
+      "event": "program_disable",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E23",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "disable program",
+      "gate": "DOC_ONLY_DO_NOT_SEND"
+    },
+    {
+      "id": "WS-24",
+      "transport": "WEBSOCKET",
+      "event": "RFC6455 PING/PONG",
+      "direction": "TRANSPORT_CONTROL",
+      "evidence_id": "A3-E24",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "not JSON ping/pong; server timing unknown",
+      "gate": "WS_APPROVAL_REQUIRED"
+    },
+    {
+      "id": "WS-25",
+      "transport": "WEBSOCKET",
+      "event": "generic event handler",
+      "direction": "INBOUND_GENERIC",
+      "evidence_id": "A3-E25",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "does not establish an event-name list",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-26",
+      "transport": "WEBSOCKET",
+      "event": "device_disconnected",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "API-EV-058",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "Groovy child handles event but server delivery and fields unverified",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-27",
+      "transport": "WEBSOCKET",
+      "event": "flow_sensor_state_changed",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "API-EV-058",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "Groovy child handles event; response shape not verified",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    },
+    {
+      "id": "WS-28",
+      "transport": "WEBSOCKET",
+      "event": "set_manual_preset_time",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "API-EV-024",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "Groovy inbound handler name differs from outbound set_manual_preset_runtime; do not equate",
+      "gate": "OBSERVATIONAL_WS_ONLY"
+    }
+  ]
+}

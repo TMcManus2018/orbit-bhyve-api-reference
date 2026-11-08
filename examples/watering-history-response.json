@@ -1,0 +1,16 @@
+[
+  {
+    "id": "SYNTHETIC_CONTAINER_01",
+    "device_id": "SYNTHETIC_CONTROLLER_01",
+    "date": "2026-07-25",
+    "irrigation": [
+      {
+        "station": 1,
+        "start_time": "2026-07-25T10:00:00Z",
+        "run_time": 6,
+        "water_volume_gal": 12.5,
+        "status": "SYNTHETIC_STATUS"
+      }
+    ]
+  }
+]

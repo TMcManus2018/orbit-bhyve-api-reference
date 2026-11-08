@@ -1,0 +1,16 @@
+[
+  {
+    "id": "SYNTHETIC_CONTROLLER_01",
+    "name": "Synthetic controller",
+    "num_stations": 2,
+    "status": "SYNTHETIC_STATUS",
+    "zones": [
+      {
+        "station": 1
+      },
+      {
+        "station": 2
+      }
+    ]
+  }
+]

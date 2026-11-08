@@ -1,0 +1,1432 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Orbit B-hyve FULL research REST inventory — INERT",
+    "version": "0.1.0",
+    "description": "27 documented HTTP method/path candidates, not vendor-verified API. Dummy host; do not serve to Swagger UI or generate clients."
+  },
+  "servers": [
+    {
+      "url": "https://example.invalid",
+      "description": "Non-routable dummy endpoint; never substitute production address"
+    }
+  ],
+  "x-documentation-only": true,
+  "x-research-source": "e393dc326a84c22aa1587e71456010bf6219ac87",
+  "x-protocol-coverage": {
+    "REST_method_path_entries": 27,
+    "WS_source_rows": 28,
+    "WS_named_JSON_events": 26,
+    "resource_edges": 13,
+    "evidence_through": "API-EV-070",
+    "claim_of_vendor_exhaustiveness": false
+  },
+  "paths": {
+    "/v1/session": {
+      "post": {
+        "operationId": "research_rest_01",
+        "summary": "POST /v1/session [OPERATOR_200]",
+        "description": "Unexecutable research definition only. session field variants; API key vs session token; app-id-dependent claims. No live execution or controller control authorized.",
+        "tags": [
+          "AUTH_EXCHANGE"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "orbit_api_key": {
+                      "type": "string",
+                      "description": "Secret observed in one session; redact."
+                    },
+                    "orbit_session_token": {
+                      "type": "string",
+                      "description": "Alternative token from client sources; not seen in selected session."
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-01",
+        "x-evidence-id": "A2-E01",
+        "x-current-evidence": "A2-E01",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "OBSERVE_AUTH_OFFLINE_FIRST",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/sebr/pybhyve/blob/df8316f174bf3cf18db34d62c378b5da6af1c8fc/pybhyve/client.py#L127-L137",
+          "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L120-L143",
+          "https://github.com/jordanpwalsh/bhyve-api/blob/3f6f7e90a53db98f8bcb4dcac682034b5c31cf3c/src/bhyve-api.ts#L37-L60"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "requestBody": {
+          "required": true,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "session": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string",
+                        "format": "password"
+                      }
+                    },
+                    "required": [
+                      "email",
+                      "password"
+                    ]
+                  }
+                },
+                "required": [
+                  "session"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/devices": {
+      "get": {
+        "operationId": "research_rest_02",
+        "summary": "GET /v1/devices [OPERATOR_200]",
+        "description": "Unexecutable research definition only. C2 operator report: API-key baseline and individual configured Origin/Referer/User-Agent omissions each HTTP 200, identical full one-device arrays; Orbit-App-Id omission HTTP 401; no session token issued. Other account/header/app-ID profiles remain unknown (API-EV-062). No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-02",
+        "x-evidence-id": "A2-E02",
+        "x-current-evidence": "API-EV-062",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/billchurch/bhyve-api/blob/c1d6a58259e60a24dcb95732cbef4f5bbb489718/src/index.js#L98-L105",
+          "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L69-L83",
+          "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L156-L159"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE"
+      }
+    },
+    "/v1/devices/{device_id}": {
+      "get": {
+        "operationId": "research_rest_03",
+        "summary": "GET /v1/devices/{device_id} [OPERATOR_200]",
+        "description": "Unexecutable research definition only. device fields not fully characterized. No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-03",
+        "x-evidence-id": "A2-E03",
+        "x-current-evidence": "A2-E03",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L108-L141",
+          "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L126-L142"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ]
+      },
+      "put": {
+        "operationId": "research_rest_23",
+        "summary": "PUT /v1/devices/{device_id} [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. rain-delay / device body variants across clients. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-23",
+        "x-evidence-id": "A2-E16",
+        "x-current-evidence": "A2-E16",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/REST/Endpoints.swift#L43-L46"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/watering_events/{device_id}": {
+      "get": {
+        "operationId": "research_rest_04",
+        "summary": "GET /v1/watering_events/{device_id} [OPERATOR_200]",
+        "description": "Unexecutable research definition only. C3 operator report: 6 pages to EMPTY_PAGE, 68 REST containers, first-page SAME_PAYLOAD, valid structure, 21 irrigation events on Aug 6-8; whole-history completeness, later-page stability and retention remain unverified (API-EV-063). No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-04",
+        "x-evidence-id": "A2-E04",
+        "x-current-evidence": "API-EV-063",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L166-L173",
+          "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L145-L162"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Endpoint-specific paging, not a global contract."
+          },
+          {
+            "in": "query",
+            "name": "per-page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Endpoint-specific paging, not a global contract."
+          }
+        ]
+      }
+    },
+    "/v1/sprinkler_timer_programs": {
+      "get": {
+        "operationId": "research_rest_05",
+        "summary": "GET /v1/sprinkler_timer_programs [OPERATOR_200]",
+        "description": "Unexecutable research definition only. C1 operator report: unfiltered and device_id-filtered responses identical full 5-item arrays for one device; ignored filter versus all-programs-for-device unresolved (API-EV-061). No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-05",
+        "x-evidence-id": "A2-E05",
+        "x-current-evidence": "API-EV-061",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L189-L198",
+          "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L282-L316"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE"
+      },
+      "post": {
+        "operationId": "research_rest_20",
+        "summary": "POST /v1/sprinkler_timer_programs [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. program creation and state modification. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-20",
+        "x-evidence-id": "A2-E15",
+        "x-current-evidence": "A2-E15",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L200-L244",
+          "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L175-L181"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/landscape_descriptions/{device_id}": {
+      "get": {
+        "operationId": "research_rest_06",
+        "summary": "GET /v1/landscape_descriptions/{device_id} [OPERATOR_200]",
+        "description": "Unexecutable research definition only. array shape partial; t query parameter. No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-06",
+        "x-evidence-id": "A2-E06",
+        "x-current-evidence": "A2-E06",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/client.py#L169-L181",
+          "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ]
+      }
+    },
+    "/v1/zone_reports/{device_id}": {
+      "get": {
+        "operationId": "research_rest_07",
+        "summary": "GET /v1/zone_reports/{device_id} [OPERATOR_302]",
+        "description": "Unexecutable research definition only. S3 unpinned variant; 4 opaque/device path segments; unknown query keys; no target fetch. No live execution or controller control authorized.",
+        "tags": [
+          "REDIRECT_SOURCE"
+        ],
+        "responses": {
+          "302": {
+            "description": "Observed OTHER_CANONICAL_PATH S3 redirect; target NOT followed or approved."
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-07",
+        "x-evidence-id": "A2-E07",
+        "x-current-evidence": "A2-E07",
+        "x-prior-observation": "OPERATOR_302",
+        "x-current-observation": "OPERATOR_302",
+        "x-prior-gate": "FIRST_PARTY_DONE_NO_TARGET",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ]
+      }
+    },
+    "/v1/event_logs/{device_id}": {
+      "get": {
+        "operationId": "research_rest_08",
+        "summary": "GET /v1/event_logs/{device_id} [OPERATOR_200]",
+        "description": "Unexecutable research definition only. C1 operator report: page 1 identical 100-item arrays at per-page=10/50; page 2 identical empty arrays; server cap, total, ordering and retention unknown (API-EV-061). No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-08",
+        "x-evidence-id": "A2-E08",
+        "x-current-evidence": "API-EV-061",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Endpoint-specific paging, not a global contract."
+          },
+          {
+            "in": "query",
+            "name": "per-page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Endpoint-specific paging, not a global contract."
+          }
+        ]
+      }
+    },
+    "/v1/meshes/{mesh_id}": {
+      "get": {
+        "operationId": "research_rest_09",
+        "summary": "GET /v1/meshes/{mesh_id} [HTTP_200]",
+        "description": "Unexecutable research definition only. mesh identifier not operator-authorized/available. No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "200": {
+            "description": "Bounded 2026-11-02 owner-reported mesh success, ID equality and one devices-array entry; schema remains partial.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "Observed id matched owner-selected mesh identifier in second bounded probe; JSON type not disclosed."
+                    },
+                    "devices": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "device_id": {
+                            "description": "Recognized key in one array item; value NOT compared to owner's selected controller."
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "description": "One object observed; selected controller membership NOT established."
+                    },
+                    "created_at": {
+                      "description": "Observed present, type/value not assessed."
+                    }
+                  },
+                  "additionalProperties": true,
+                  "x-one-session-only": true,
+                  "x-observed-array-length": 1
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-09",
+        "x-evidence-id": "A2-E09",
+        "x-current-evidence": "API-EV-071",
+        "x-prior-observation": "NOT_TESTED_ID_MISSING",
+        "x-current-observation": "HTTP_200",
+        "x-prior-gate": "NEED_AUTHORIZED_ID",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L459-L461",
+          "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L147-L221"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "mesh_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "x-new-observation-scope": "2026-11-02 owner-reported, private selected account only"
+      }
+    },
+    "/v1/network_topologies/{topology_id}": {
+      "get": {
+        "operationId": "research_rest_10",
+        "summary": "GET /v1/network_topologies/{topology_id} [NOT_TESTED_ID_MISSING]",
+        "description": "Unexecutable research definition only. topology identifier not operator-authorized/available. No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-10",
+        "x-evidence-id": "A2-E09",
+        "x-current-evidence": "A2-E09",
+        "x-prior-observation": "NOT_TESTED_ID_MISSING",
+        "x-current-observation": "NOT_TESTED_ID_MISSING",
+        "x-prior-gate": "NEED_AUTHORIZED_ID",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L459-L461",
+          "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L147-L221"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topology_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ]
+      }
+    },
+    "/v1/users/{user_id}": {
+      "get": {
+        "operationId": "research_rest_11",
+        "summary": "GET /v1/users/{user_id} [HTTP_200]",
+        "description": "Unexecutable research definition only. user identifier/privacy and response schema unknown. No live execution or controller control authorized.",
+        "tags": [
+          "READ_SENSITIVE"
+        ],
+        "responses": {
+          "200": {
+            "description": "Owner-reported single selected account HTTP 200 on 2026-11-02; data schema partial and private.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "Value equaled owner-selected user ID; type unreported."
+                    }
+                  },
+                  "additionalProperties": true,
+                  "x-unrecognized-top-level-key-count": 11
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-11",
+        "x-evidence-id": "A2-E10",
+        "x-current-evidence": "API-EV-071",
+        "x-prior-observation": "NOT_TESTED_ID_MISSING",
+        "x-current-observation": "HTTP_200",
+        "x-prior-gate": "NEED_AUTHORIZED_ID",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L440-L448"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "x-new-observation-scope": "2026-11-02 owner-reported, private selected account only"
+      }
+    },
+    "/v1/user_feedback": {
+      "get": {
+        "operationId": "research_rest_12",
+        "summary": "GET /v1/user_feedback?user_id={user_id} [HTTP_200]",
+        "description": "Unexecutable research definition only. user feedback contains potentially private content. No live execution or controller control authorized.",
+        "tags": [
+          "READ_SENSITIVE"
+        ],
+        "responses": {
+          "200": {
+            "description": "Owner-reported single selected account HTTP 200 on 2026-11-02; data schema partial and private.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "description": "Recognized in key union across 11 records; optional."
+                      },
+                      "user_id": {
+                        "description": "Recognized in key union across 11 records; optional."
+                      },
+                      "created_at": {
+                        "description": "Recognized in key union across 11 records; optional."
+                      }
+                    },
+                    "additionalProperties": true
+                  },
+                  "x-observed-array-length": 11,
+                  "x-unknown-record-field-occurrences": 6
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-12",
+        "x-evidence-id": "A2-E10",
+        "x-current-evidence": "API-EV-071",
+        "x-prior-observation": "NOT_TESTED_ID_MISSING",
+        "x-current-observation": "HTTP_200",
+        "x-prior-gate": "NEED_AUTHORIZED_ID",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L440-L448"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sensitive owner ID; source-only untested request."
+          }
+        ],
+        "x-new-observation-scope": "2026-11-02 owner-reported, private selected account only"
+      }
+    },
+    "/v1/landscapes": {
+      "get": {
+        "operationId": "research_rest_13",
+        "summary": "GET /v1/landscapes [OPERATOR_404]",
+        "description": "Unexecutable research definition only. 404 for one session; dashboard local [] fallback not vendor observation. No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "404": {
+            "description": "Repeated owner-account/profile 404 on 2026-11-02; cannot infer universal route absence."
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-13",
+        "x-evidence-id": "A2-E11",
+        "x-current-evidence": "API-EV-071",
+        "x-prior-observation": "OPERATOR_404",
+        "x-current-observation": "OPERATOR_404",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L185-L218"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "x-new-observation-scope": "2026-11-02 owner-reported, private selected account only"
+      }
+    },
+    "/v1/weather_forecast/{device_id}": {
+      "get": {
+        "operationId": "research_rest_14",
+        "summary": "GET /v1/weather_forecast/{device_id} [OPERATOR_404]",
+        "description": "Unexecutable research definition only. 404 for one session; context and route variants unknown. No live execution or controller control authorized.",
+        "tags": [
+          "READ"
+        ],
+        "responses": {
+          "404": {
+            "description": "Repeated owner-account/profile 404 on 2026-11-02; cannot infer universal route absence."
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-14",
+        "x-evidence-id": "A2-E11",
+        "x-current-evidence": "API-EV-071",
+        "x-prior-observation": "OPERATOR_404",
+        "x-current-observation": "OPERATOR_404",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [
+          "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L185-L218"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "x-new-observation-scope": "2026-11-02 owner-reported, private selected account only"
+      }
+    },
+    "/v1/bhyve_accounts/{account_id}": {
+      "get": {
+        "operationId": "research_rest_15",
+        "summary": "GET /v1/bhyve_accounts/{account_id} [OPERATOR_200]",
+        "description": "Unexecutable research definition only. account shape incomplete; restrict to own account. No live execution or controller control authorized.",
+        "tags": [
+          "READ_SENSITIVE"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-15",
+        "x-evidence-id": "A2-E12",
+        "x-current-evidence": "A2-E12",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ]
+      }
+    },
+    "/v1/bhyve_accounts/{account_id}/devices": {
+      "get": {
+        "operationId": "research_rest_16",
+        "summary": "GET /v1/bhyve_accounts/{account_id}/devices [OPERATOR_404]",
+        "description": "Unexecutable research definition only. 404 for one account despite code fallback. No live execution or controller control authorized.",
+        "tags": [
+          "READ_SENSITIVE"
+        ],
+        "responses": {
+          "404": {
+            "description": "Repeated owner-account/profile 404 on 2026-11-02; cannot infer universal route absence."
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-16",
+        "x-evidence-id": "A2-E12",
+        "x-current-evidence": "API-EV-071",
+        "x-prior-observation": "OPERATOR_404",
+        "x-current-observation": "OPERATOR_404",
+        "x-prior-gate": "SAFE_GET_PROPOSAL",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "x-new-observation-scope": "2026-11-02 owner-reported, private selected account only"
+      }
+    },
+    "/v1/device_assets/{device_id}": {
+      "get": {
+        "operationId": "research_rest_17",
+        "summary": "GET /v1/device_assets/{device_id} [OPERATOR_200]",
+        "description": "Unexecutable research definition only. C3 operator report: authenticated daily asset index AVAILABLE, all three fixed Aug 6/7/8 dates indexed/retrieved; index longevity and revisions remain unknown (API-EV-063). No live execution or controller control authorized.",
+        "tags": [
+          "SIGNED_ASSET_INDEX"
+        ],
+        "responses": {
+          "200": {
+            "description": "Operator-reported selected session returned HTTP 200. Schema partial or unknown, not universal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-17",
+        "x-evidence-id": "A2-E13",
+        "x-current-evidence": "API-EV-063",
+        "x-prior-observation": "OPERATOR_200",
+        "x-current-observation": "OPERATOR_200",
+        "x-prior-gate": "EXISTING_PATH_ONLY",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ]
+      }
+    },
+    "/v1/device_assets/{device_id}/{yyyymmdd}": {
+      "get": {
+        "operationId": "research_rest_18",
+        "summary": "GET /v1/device_assets/{device_id}/{yyyymmdd} [OPERATOR_302_TO_VERIFIED_S3]",
+        "description": "Unexecutable research definition only. C3 operator report: existing validated daily-device-asset policy yielded Aug 7 21 matched irrigations; Aug 6/8 AVAILABLE documents had EXPLICIT_NULL watering_events (unknown, not zero). No zone target and no general signed-link allowlist expansion (API-EV-063). No live execution or controller control authorized.",
+        "tags": [
+          "SIGNED_DAILY_ASSET"
+        ],
+        "responses": {
+          "302": {
+            "description": "Signed daily-asset redirect; existing narrowly validated policy only."
+          },
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-18",
+        "x-evidence-id": "A2-E13",
+        "x-current-evidence": "API-EV-063",
+        "x-prior-observation": "OPERATOR_302_TO_VERIFIED_S3",
+        "x-current-observation": "OPERATOR_302_TO_VERIFIED_S3",
+        "x-prior-gate": "EXISTING_PATH_ONLY",
+        "x-provenance": "BOUNDED_OPERATOR_REPORT",
+        "x-code-pins": [],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          },
+          {
+            "in": "path",
+            "name": "yyyymmdd",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ]
+      }
+    },
+    "/v1/graph2": {
+      "post": {
+        "operationId": "research_rest_19",
+        "summary": "POST /v1/graph2 [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. graph-shaped query POST could be stateful; response not verified. No live execution or controller control authorized.",
+        "tags": [
+          "MUTATION_UNKNOWN"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-19",
+        "x-evidence-id": "A2-E14",
+        "x-current-evidence": "A2-E14",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L225-L257"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sprinkler_timer_programs/{program_id}": {
+      "put": {
+        "operationId": "research_rest_21",
+        "summary": "PUT /v1/sprinkler_timer_programs/{program_id} [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. program modification. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-21",
+        "x-evidence-id": "A2-E15",
+        "x-current-evidence": "A2-E15",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L200-L244",
+          "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L175-L181"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "program_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "research_rest_22",
+        "summary": "DELETE /v1/sprinkler_timer_programs/{program_id} [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. program deletion. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-22",
+        "x-evidence-id": "A2-E15",
+        "x-current-evidence": "A2-E15",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L200-L244",
+          "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L175-L181"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "program_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/devices/{device_id}/rain_delay": {
+      "post": {
+        "operationId": "research_rest_24",
+        "summary": "POST /v1/devices/{device_id}/rain_delay [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. distinct REST rain-delay route. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-24",
+        "x-evidence-id": "A2-E17",
+        "x-current-evidence": "A2-E17",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L292-L355"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/devices/{device_id}/manual_watering": {
+      "post": {
+        "operationId": "research_rest_25",
+        "summary": "POST /v1/devices/{device_id}/manual_watering [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. start watering; device action. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-25",
+        "x-evidence-id": "A2-E18",
+        "x-current-evidence": "A2-E18",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L218-L292"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/devices/{device_id}/stop": {
+      "post": {
+        "operationId": "research_rest_26",
+        "summary": "POST /v1/devices/{device_id}/stop [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. stop watering; device action. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-26",
+        "x-evidence-id": "A2-E18",
+        "x-current-evidence": "A2-E18",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [
+          "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L218-L292"
+        ],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/landscape_descriptions/{landscape_id}": {
+      "put": {
+        "operationId": "research_rest_27",
+        "summary": "PUT /v1/landscape_descriptions/{landscape_id} [SOURCE_ONLY]",
+        "description": "Unexecutable research definition only. landscape_description payload shape from dependent client; no server write result. No live execution or controller control authorized.",
+        "tags": [
+          "STATE_CHANGE"
+        ],
+        "responses": {
+          "default": {
+            "description": "Protocol status, response and errors not established universally; this is not an execution contract."
+          }
+        },
+        "x-doc-only": true,
+        "x-entry-id": "REST-27",
+        "x-evidence-id": "API-EV-017",
+        "x-current-evidence": "API-EV-017",
+        "x-prior-observation": "SOURCE_ONLY",
+        "x-current-observation": "SOURCE_ONLY",
+        "x-prior-gate": "DOC_ONLY_DO_NOT_SEND",
+        "x-provenance": "THIRD_PARTY_SOURCE_ONLY",
+        "x-code-pins": [],
+        "x-schema-completeness": "PARTIAL_OR_UNKNOWN",
+        "x-execution-policy": "DO_NOT_EXECUTE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "landscape_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Use owner-authorized identifiers only; no enumeration."
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "description": "Unverified body. Login only is historically permitted in separate authorized experiments. Other POST/PUT/DELETE operations can change state.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Unknown potentially state-changing payload. Do not send."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-evidence-through": "API-EV-072"
+}

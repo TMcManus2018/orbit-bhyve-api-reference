@@ -1,0 +1,1116 @@
+{
+  "schema": "orbit-bhyve-full-evidence-model-v1",
+  "prepared": "2026-11-01 (Pacific)",
+  "snapshot_branch": "api-5c-c4e-mesh-once",
+  "snapshot_sha": "e393dc326a84c22aa1587e71456010bf6219ac87",
+  "source_map": "evidence/api5c-request-surface.json",
+  "policy": "DOCUMENTATION_ONLY_NO_EXECUTION",
+  "coverage": {
+    "REST_method_path_entries": 27,
+    "WS_source_rows": 28,
+    "WS_named_JSON_events": 26,
+    "resource_edges": 13,
+    "evidence_through": "API-EV-072",
+    "claim_of_vendor_exhaustiveness": false
+  },
+  "limitations": [
+    "Third-party client source proves construction/handlers, not Orbit acceptance.",
+    "A successful bounded owner-run REST response is not a universal schema/availability guarantee.",
+    "No live WebSocket server message, subscription acknowledgement, response schema, or control effect was verified.",
+    "Zone-report redirect target remains unfetched; no widened signed-URL allowlist.",
+    "Historical retention, asset explicit null, token equivalence, response typing and vendor completeness remain unresolved."
+  ],
+  "security": {
+    "run_network": false,
+    "execute_device_controls": false,
+    "authorize_websocket": false,
+    "follow_zone_report_redirect": false,
+    "approve_credential_probes": false,
+    "change_production": false
+  },
+  "http": [
+    {
+      "id": "REST-01",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/session",
+      "evidence_id": "A2-E01",
+      "risk": "AUTH_EXCHANGE",
+      "observation": "OPERATOR_200",
+      "gap": "session field variants; API key vs session token; app-id-dependent claims",
+      "gate": "OBSERVE_AUTH_OFFLINE_FIRST",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "A2-E01",
+      "code_pins": [
+        "https://github.com/sebr/pybhyve/blob/df8316f174bf3cf18db34d62c378b5da6af1c8fc/pybhyve/client.py#L127-L137",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L120-L143",
+        "https://github.com/jordanpwalsh/bhyve-api/blob/3f6f7e90a53db98f8bcb4dcac682034b5c31cf3c/src/bhyve-api.ts#L37-L60"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-02",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/devices",
+      "evidence_id": "A2-E02",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C2 operator report: API-key baseline and individual configured Origin/Referer/User-Agent omissions each HTTP 200, identical full one-device arrays; Orbit-App-Id omission HTTP 401; no session token issued. Other account/header/app-ID profiles remain unknown (API-EV-062)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-062",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "API-EV-062",
+      "code_pins": [
+        "https://github.com/billchurch/bhyve-api/blob/c1d6a58259e60a24dcb95732cbef4f5bbb489718/src/index.js#L98-L105",
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L69-L83",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L156-L159"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-03",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/devices/{device_id}",
+      "evidence_id": "A2-E03",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "device fields not fully characterized",
+      "gate": "SAFE_GET_PROPOSAL",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "A2-E03",
+      "code_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L108-L141",
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L126-L142"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-04",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/watering_events/{device_id}",
+      "evidence_id": "A2-E04",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C3 operator report: 6 pages to EMPTY_PAGE, 68 REST containers, first-page SAME_PAYLOAD, valid structure, 21 irrigation events on Aug 6-8; whole-history completeness, later-page stability and retention remain unverified (API-EV-063)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-063",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "API-EV-063",
+      "code_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L166-L173",
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L145-L162"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-05",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/sprinkler_timer_programs",
+      "evidence_id": "A2-E05",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C1 operator report: unfiltered and device_id-filtered responses identical full 5-item arrays for one device; ignored filter versus all-programs-for-device unresolved (API-EV-061)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-061",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "API-EV-061",
+      "code_pins": [
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L189-L198",
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L282-L316"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-06",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/landscape_descriptions/{device_id}",
+      "evidence_id": "A2-E06",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "array shape partial; t query parameter",
+      "gate": "SAFE_GET_PROPOSAL",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "A2-E06",
+      "code_pins": [
+        "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/client.py#L169-L181",
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-07",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/zone_reports/{device_id}",
+      "evidence_id": "A2-E07",
+      "risk": "REDIRECT_SOURCE",
+      "observation": "OPERATOR_302",
+      "gap": "S3 unpinned variant; 4 opaque/device path segments; unknown query keys; no target fetch",
+      "gate": "FIRST_PARTY_DONE_NO_TARGET",
+      "current_observation": "OPERATOR_302",
+      "current_evidence": "A2-E07",
+      "code_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-08",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/event_logs/{device_id}",
+      "evidence_id": "A2-E08",
+      "risk": "READ",
+      "observation": "OPERATOR_200",
+      "gap": "C1 operator report: page 1 identical 100-item arrays at per-page=10/50; page 2 identical empty arrays; server cap, total, ordering and retention unknown (API-EV-061)",
+      "gate": "SAFE_GET_PROPOSAL",
+      "evidence_addendum": "API-EV-061",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "API-EV-061",
+      "code_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-09",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/meshes/{mesh_id}",
+      "evidence_id": "A2-E09",
+      "risk": "READ",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "mesh identifier not operator-authorized/available",
+      "gate": "NEED_AUTHORIZED_ID",
+      "latest_live_observation": {
+        "evidence_id": "API-EV-070",
+        "provenance": "OPERATOR_REPORTED_BOUNDED_LIVE_FIRST_PARTY_REST",
+        "observation": "HTTP_200",
+        "endpoint": "GET /v1/meshes/{private_mesh_id}",
+        "response_media_type": "application/json",
+        "top_level_json": "OBJECT",
+        "top_level_keys_present": [
+          "id",
+          "devices",
+          "created_at"
+        ],
+        "devices_value_kind": "ARRAY",
+        "top_level_keys_absent": [
+          "mesh_id",
+          "name",
+          "network_topology_id",
+          "updated_at"
+        ],
+        "physical_http_requests_total_including_login": 2,
+        "one_run_authorization": "CONSUMED",
+        "mesh_id_value_matches_request": "NOT_COMPARED",
+        "selected_controller_in_returned_devices": "NOT_ASSESSED",
+        "raw_response_retained": false,
+        "scope_limit": "ONE_SELECTED_MESH_ONE_ACCOUNT_ONE_SESSION"
+      },
+      "observation_historical_note": "Prior NOT_TESTED_ID_MISSING is retained as API-4 baseline. Latest one-shot mesh GET outcome is HTTP 200 (API-EV-070).",
+      "current_observation": "HTTP_200",
+      "current_evidence": "API-EV-071",
+      "code_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L459-L461",
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L147-L221"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT",
+      "api5e_evidence": "API-EV-071",
+      "api5e_shape": {
+        "root": "OBJECT",
+        "returned_id_equals_private_mesh": true,
+        "recognized_root_keys": [
+          "id",
+          "devices",
+          "created_at"
+        ],
+        "devices_array_count": 1,
+        "devices_record_key_union": [
+          "device_id"
+        ],
+        "device_matches_selected_controller": "NOT_COMPARED"
+      }
+    },
+    {
+      "id": "REST-10",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/network_topologies/{topology_id}",
+      "evidence_id": "A2-E09",
+      "risk": "READ",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "topology identifier not operator-authorized/available",
+      "gate": "NEED_AUTHORIZED_ID",
+      "current_observation": "NOT_TESTED_ID_MISSING",
+      "current_evidence": "A2-E09",
+      "code_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L459-L461",
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L147-L221"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-11",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/users/{user_id}",
+      "evidence_id": "A2-E10",
+      "risk": "READ_SENSITIVE",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "user identifier/privacy and response schema unknown",
+      "gate": "NEED_AUTHORIZED_ID",
+      "current_observation": "HTTP_200",
+      "current_evidence": "API-EV-071",
+      "code_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L440-L448"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT",
+      "api5e_evidence": "API-EV-071",
+      "api5e_shape": {
+        "root": "OBJECT",
+        "returned_id_equals_private_owner_user": true,
+        "recognized_root_keys": [
+          "id"
+        ],
+        "unrecognized_root_key_count": 11
+      }
+    },
+    {
+      "id": "REST-12",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/user_feedback?user_id={user_id}",
+      "evidence_id": "A2-E10",
+      "risk": "READ_SENSITIVE",
+      "observation": "NOT_TESTED_ID_MISSING",
+      "gap": "user feedback contains potentially private content",
+      "gate": "NEED_AUTHORIZED_ID",
+      "current_observation": "HTTP_200",
+      "current_evidence": "API-EV-071",
+      "code_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L440-L448"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT",
+      "api5e_evidence": "API-EV-071",
+      "api5e_shape": {
+        "root": "ARRAY",
+        "items_count": 11,
+        "all_items_objects": true,
+        "recognized_record_key_union": [
+          "created_at",
+          "id",
+          "user_id"
+        ],
+        "unrecognized_record_key_occurrences": 6
+      }
+    },
+    {
+      "id": "REST-13",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/landscapes",
+      "evidence_id": "A2-E11",
+      "risk": "READ",
+      "observation": "OPERATOR_404",
+      "gap": "404 for one session; dashboard local [] fallback not vendor observation",
+      "gate": "SAFE_GET_PROPOSAL",
+      "current_observation": "OPERATOR_404",
+      "current_evidence": "API-EV-071",
+      "code_pins": [
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L185-L218"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT",
+      "api5e_evidence": "API-EV-071",
+      "api5e_shape": {
+        "status": 404,
+        "scope": "ONE_ACCOUNT_ONE_SESSION",
+        "global_route_absence_proven": false
+      }
+    },
+    {
+      "id": "REST-14",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/weather_forecast/{device_id}",
+      "evidence_id": "A2-E11",
+      "risk": "READ",
+      "observation": "OPERATOR_404",
+      "gap": "404 for one session; context and route variants unknown",
+      "gate": "SAFE_GET_PROPOSAL",
+      "current_observation": "OPERATOR_404",
+      "current_evidence": "API-EV-071",
+      "code_pins": [
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L185-L218"
+      ],
+      "provenance": "BOUNDED_OPERATOR_REPORT",
+      "api5e_evidence": "API-EV-071",
+      "api5e_shape": {
+        "status": 404,
+        "scope": "ONE_ACCOUNT_ONE_SESSION",
+        "global_route_absence_proven": false
+      }
+    },
+    {
+      "id": "REST-15",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/bhyve_accounts/{account_id}",
+      "evidence_id": "A2-E12",
+      "risk": "READ_SENSITIVE",
+      "observation": "OPERATOR_200",
+      "gap": "account shape incomplete; restrict to own account",
+      "gate": "SAFE_GET_PROPOSAL",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "A2-E12",
+      "code_pins": [],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-16",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/bhyve_accounts/{account_id}/devices",
+      "evidence_id": "A2-E12",
+      "risk": "READ_SENSITIVE",
+      "observation": "OPERATOR_404",
+      "gap": "404 for one account despite code fallback",
+      "gate": "SAFE_GET_PROPOSAL",
+      "current_observation": "OPERATOR_404",
+      "current_evidence": "API-EV-071",
+      "code_pins": [],
+      "provenance": "BOUNDED_OPERATOR_REPORT",
+      "api5e_evidence": "API-EV-071",
+      "api5e_shape": {
+        "status": 404,
+        "scope": "ONE_ACCOUNT_ONE_SESSION",
+        "global_route_absence_proven": false
+      }
+    },
+    {
+      "id": "REST-17",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/device_assets/{device_id}",
+      "evidence_id": "A2-E13",
+      "risk": "SIGNED_ASSET_INDEX",
+      "observation": "OPERATOR_200",
+      "gap": "C3 operator report: authenticated daily asset index AVAILABLE, all three fixed Aug 6/7/8 dates indexed/retrieved; index longevity and revisions remain unknown (API-EV-063)",
+      "gate": "EXISTING_PATH_ONLY",
+      "evidence_addendum": "API-EV-063",
+      "current_observation": "OPERATOR_200",
+      "current_evidence": "API-EV-063",
+      "code_pins": [],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-18",
+      "transport": "HTTP",
+      "method": "GET",
+      "path": "/v1/device_assets/{device_id}/{yyyymmdd}",
+      "evidence_id": "A2-E13",
+      "risk": "SIGNED_DAILY_ASSET",
+      "observation": "OPERATOR_302_TO_VERIFIED_S3",
+      "gap": "C3 operator report: existing validated daily-device-asset policy yielded Aug 7 21 matched irrigations; Aug 6/8 AVAILABLE documents had EXPLICIT_NULL watering_events (unknown, not zero). No zone target and no general signed-link allowlist expansion (API-EV-063)",
+      "gate": "EXISTING_PATH_ONLY",
+      "evidence_addendum": "API-EV-063",
+      "current_observation": "OPERATOR_302_TO_VERIFIED_S3",
+      "current_evidence": "API-EV-063",
+      "code_pins": [],
+      "provenance": "BOUNDED_OPERATOR_REPORT"
+    },
+    {
+      "id": "REST-19",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/graph2",
+      "evidence_id": "A2-E14",
+      "risk": "MUTATION_UNKNOWN",
+      "observation": "SOURCE_ONLY",
+      "gap": "graph-shaped query POST could be stateful; response not verified",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E14",
+      "code_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L225-L257"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-20",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/sprinkler_timer_programs",
+      "evidence_id": "A2-E15",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "program creation and state modification",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E15",
+      "code_pins": [
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L200-L244",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L175-L181"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-21",
+      "transport": "HTTP",
+      "method": "PUT",
+      "path": "/v1/sprinkler_timer_programs/{program_id}",
+      "evidence_id": "A2-E15",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "program modification",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E15",
+      "code_pins": [
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L200-L244",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L175-L181"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-22",
+      "transport": "HTTP",
+      "method": "DELETE",
+      "path": "/v1/sprinkler_timer_programs/{program_id}",
+      "evidence_id": "A2-E15",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "program deletion",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E15",
+      "code_pins": [
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L200-L244",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L175-L181"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-23",
+      "transport": "HTTP",
+      "method": "PUT",
+      "path": "/v1/devices/{device_id}",
+      "evidence_id": "A2-E16",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "rain-delay / device body variants across clients",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E16",
+      "code_pins": [
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/REST/Endpoints.swift#L43-L46"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-24",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/devices/{device_id}/rain_delay",
+      "evidence_id": "A2-E17",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "distinct REST rain-delay route",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E17",
+      "code_pins": [
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L292-L355"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-25",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/devices/{device_id}/manual_watering",
+      "evidence_id": "A2-E18",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "start watering; device action",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E18",
+      "code_pins": [
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L218-L292"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-26",
+      "transport": "HTTP",
+      "method": "POST",
+      "path": "/v1/devices/{device_id}/stop",
+      "evidence_id": "A2-E18",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "stop watering; device action",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "A2-E18",
+      "code_pins": [
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L218-L292"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    },
+    {
+      "id": "REST-27",
+      "transport": "HTTP",
+      "method": "PUT",
+      "path": "/v1/landscape_descriptions/{landscape_id}",
+      "evidence_id": "API-EV-017",
+      "risk": "STATE_CHANGE",
+      "observation": "SOURCE_ONLY",
+      "gap": "landscape_description payload shape from dependent client; no server write result",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "current_observation": "SOURCE_ONLY",
+      "current_evidence": "API-EV-017",
+      "code_pins": [],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY"
+    }
+  ],
+  "websocket": [
+    {
+      "id": "WS-01",
+      "transport": "WEBSOCKET",
+      "event": "app_connection",
+      "direction": "OUTBOUND_AUTH",
+      "evidence_id": "A3-E01",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "ws credential accepted/ack not established",
+      "gate": "WS_APPROVAL_REQUIRED",
+      "code_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L242-L250",
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L427-L437"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-02",
+      "transport": "WEBSOCKET",
+      "event": "ping",
+      "direction": "OUTBOUND_KEEPALIVE",
+      "evidence_id": "A3-E02",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "JSON ping distinct from RFC6455 PING",
+      "gate": "WS_APPROVAL_REQUIRED",
+      "code_pins": [
+        "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/websocket.py#L95-L105",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L355-L368"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-03",
+      "transport": "WEBSOCKET",
+      "event": "pong",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E03",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "application JSON pong not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L149-L168"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-04",
+      "transport": "WEBSOCKET",
+      "event": "change_mode",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E04",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "changes controller mode; no command execution",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L324-L360",
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L125-L145"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-05",
+      "transport": "WEBSOCKET",
+      "event": "change_mode",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E05",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "notification not acknowledgement",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L285-L296",
+        "https://github.com/codyc1515/homebridge-orbit-bhyve/blob/a0429db5890b6f407f1db5e5df77ed03b4ce1dcf/index.js#L604-L611"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-06",
+      "transport": "WEBSOCKET",
+      "event": "rain_delay",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E06",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "may change watering policy; distinct REST methods",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L231-L240",
+        "https://github.com/blacksmithlabs/orbit-bhyve-remote/blob/29ca8d4a37c477b33ad9b60ae6128eca6242d5db/src/lib/api.js#L121-L133"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-07",
+      "transport": "WEBSOCKET",
+      "event": "rain_delay",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E07",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "notification not acknowledgement",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L297-L299",
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/WebSocket/BHyveEvent.swift#L36-L37"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-08",
+      "transport": "WEBSOCKET",
+      "event": "watering_in_progress_notification",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E08",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "fields/types/ordering unverified",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L264-L278",
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/WebSocket/BHyveEvent.swift#L22-L25"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-09",
+      "transport": "WEBSOCKET",
+      "event": "watering_complete",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E09",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "server delivery not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L279-L284",
+        "https://github.com/codyc1515/homebridge-orbit-bhyve/blob/a0429db5890b6f407f1db5e5df77ed03b4ce1dcf/index.js#L591-L602"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-10",
+      "transport": "WEBSOCKET",
+      "event": "skip_active_station",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E10",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "no identified paired send",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L300-L302"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-11",
+      "transport": "WEBSOCKET",
+      "event": "program_changed",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E11",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "not an acknowledgement of program_save",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L303-L309",
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/WebSocket/BHyveEvent.swift#L38-L44"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-12",
+      "transport": "WEBSOCKET",
+      "event": "device_idle",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E12",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "server delivery not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/device.py#L64-L90",
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/WebSocket/BHyveEvent.swift#L28-L29"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-13",
+      "transport": "WEBSOCKET",
+      "event": "device_connected",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E13",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "server delivery not independently observed",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/device.py#L87-L102",
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-sprinkler-timer.groovy#L212-L220"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-14",
+      "transport": "WEBSOCKET",
+      "event": "battery_status/device_status/fault",
+      "direction": "INBOUND_HANDLED_GROUP",
+      "evidence_id": "A3-E14",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "three source-defined candidate names grouped by A3",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/WebSocket/BHyveEvent.swift#L30-L52"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-15",
+      "transport": "WEBSOCKET",
+      "event": "clear_low_battery",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "A3-E15",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "handler alone not server evidence",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/codyc1515/homebridge-orbit-bhyve/blob/a0429db5890b6f407f1db5e5df77ed03b4ce1dcf/index.js#L614-L619"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-16",
+      "transport": "WEBSOCKET",
+      "event": "sync",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E16",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "not proven passive; can trigger device state",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L511-L521"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-17",
+      "transport": "WEBSOCKET",
+      "event": "fs_identify",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E17",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "explicit device action",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L530-L541"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-18",
+      "transport": "WEBSOCKET",
+      "event": "set_manual_preset_runtime",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E18",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "vendored source only; state change",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/norman2112/bhyve-mcp/blob/ec3a312d7020e51784a36b5e5fe03f97f6106d94/src/bhyve_mcp/pybhyve/client.py#L347-L355"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-19",
+      "transport": "WEBSOCKET",
+      "event": "program_list",
+      "direction": "OUTBOUND_UNPROVEN_READ",
+      "evidence_id": "A3-E19",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "client placeholder [] not vendor response; could trigger action",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L349-L390"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-20",
+      "transport": "WEBSOCKET",
+      "event": "program_save",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E20",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "create/update program",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L392-L432"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-21",
+      "transport": "WEBSOCKET",
+      "event": "program_delete",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E21",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "delete program",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L434-L451"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-22",
+      "transport": "WEBSOCKET",
+      "event": "program_enable",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E22",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "enable program",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L453-L470"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-23",
+      "transport": "WEBSOCKET",
+      "event": "program_disable",
+      "direction": "OUTBOUND_CONTROL",
+      "evidence_id": "A3-E23",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "disable program",
+      "gate": "DOC_ONLY_DO_NOT_SEND",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L472-L489"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-24",
+      "transport": "WEBSOCKET",
+      "event": "RFC6455 PING/PONG",
+      "direction": "TRANSPORT_CONTROL",
+      "evidence_id": "A3-E24",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "not JSON ping/pong; server timing unknown",
+      "gate": "WS_APPROVAL_REQUIRED",
+      "code_pins": [
+        "https://github.com/gillcaleb/orbit-bhyve-go-client/blob/bc05a2aa8ef2e067e37b0bf14cffa02958162d63/pkg/websocket/websocket.go#L61-L70",
+        "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/websocket.py#L130-L138"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-25",
+      "transport": "WEBSOCKET",
+      "event": "generic event handler",
+      "direction": "INBOUND_GENERIC",
+      "evidence_id": "A3-E25",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "does not establish an event-name list",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L166-L206",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L297-L314"
+      ],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-26",
+      "transport": "WEBSOCKET",
+      "event": "device_disconnected",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "API-EV-058",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "Groovy child handles event but server delivery and fields unverified",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-27",
+      "transport": "WEBSOCKET",
+      "event": "flow_sensor_state_changed",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "API-EV-058",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "Groovy child handles event; response shape not verified",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    },
+    {
+      "id": "WS-28",
+      "transport": "WEBSOCKET",
+      "event": "set_manual_preset_time",
+      "direction": "INBOUND_HANDLED",
+      "evidence_id": "API-EV-024",
+      "observation": "SOURCE_ONLY_NOT_WIRE_VERIFIED",
+      "gap": "Groovy inbound handler name differs from outbound set_manual_preset_runtime; do not equate",
+      "gate": "OBSERVATIONAL_WS_ONLY",
+      "code_pins": [],
+      "provenance": "THIRD_PARTY_SOURCE_ONLY_NO_LIVE_WS"
+    }
+  ],
+  "resource_edges": [
+    {
+      "id": "A3-R01",
+      "relationship": "Session credential → REST device requests",
+      "evidence": "A2 authentication (historical internal reference omitted) and first-party [API-EV-037](../evidence/records/API-EV-037.md): one header profile observed",
+      "not_established": "Single universal token/header profile.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R02",
+      "relationship": "REST login token → WS `app_connection`",
+      "evidence": "[H L188–210](https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/client.py#L188-L210); [H WS L138–146](https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/websocket.py#L138-L146) — **client-only**",
+      "not_established": "A valid WS handshake for API-key-only sessions.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R03",
+      "relationship": "Account/user ↔ devices",
+      "evidence": "[B L98–105](https://github.com/billchurch/bhyve-api/blob/c1d6a58259e60a24dcb95732cbef4f5bbb489718/src/index.js#L98-L105) `user_id` filter; first-party [API-EV-038](../evidence/records/API-EV-038.md) account GET 200",
+      "not_established": "Nested `/bhyve_accounts/{id}/devices` works; it returned 404 in observed profile.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R04",
+      "relationship": "Device → zone / landscape descriptions",
+      "evidence": "[J L453–458](https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458); [API-EV-042](../evidence/records/API-EV-042.md) selected GET 200",
+      "not_established": "Every zone property/relationship is present or typed.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R05",
+      "relationship": "Device → programs",
+      "evidence": "[S L189–198](https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L189-L198) `device_id` query; [API-EV-042](../evidence/records/API-EV-042.md) one array response",
+      "not_established": "`program_list` WS sender implies a supported program response.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R06",
+      "relationship": "Device → watering-history containers",
+      "evidence": "[Y L166–173](https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L166-L173); [API-EV-036](../evidence/records/API-EV-036.md) partial paging evidence",
+      "not_established": "Global retention/completeness or single event per container.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R07",
+      "relationship": "Device → event logs",
+      "evidence": "[J L453–458](https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L453-L458); [API-EV-040](../evidence/records/API-EV-040.md) limited paging result",
+      "not_established": "Same pagination as watering history.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R08",
+      "relationship": "Device → asset index",
+      "evidence": "first-party asset client (historical internal reference omitted); [API-EV-003](../evidence/records/API-EV-003.md)",
+      "not_established": "WS asset events or full archive coverage.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R09",
+      "relationship": "Asset index → daily asset links",
+      "evidence": "first-party asset code (historical internal reference omitted); [API-EV-004](../evidence/records/API-EV-004.md)",
+      "not_established": "Every historical day available; signed URLs safe to publish.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R10",
+      "relationship": "Device → zone-report redirect",
+      "evidence": "[API-EV-043](../evidence/records/API-EV-043.md) selected HTTP 302 to S3 path **outside** daily-asset allowlist",
+      "not_established": "Payload shape, safe redirect following or successful target retrieval.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R11",
+      "relationship": "Device → WS subscription",
+      "evidence": "[Y L242–252](https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L242-L252), [Go L73–77](https://github.com/gillcaleb/orbit-bhyve-go-client/blob/bc05a2aa8ef2e067e37b0bf14cffa02958162d63/pkg/websocket/websocket.go#L73-L77) — **client-only**",
+      "not_established": "One subscription per socket, accepted filter, or successful resubscription.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R12",
+      "relationship": "WS messages → device / zone / program status",
+      "evidence": "[O L262–309](https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L262-L309) — **client-handled**",
+      "not_established": "Real-time source-of-truth, ordered delivery or persistent event history.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    },
+    {
+      "id": "A3-R13",
+      "relationship": "Daily asset contains history, zone, zone-report structures",
+      "evidence": "normalization architecture (historical internal reference omitted); [API-EV-046](../evidence/records/API-EV-046.md) selected REST↔asset agreement",
+      "not_established": "Generic REST response is an asset-shaped object or immutable record; prior asset `watering_events: null` remains unexplained.",
+      "classification": "SOURCE_INFERRED_NOT_LIVE_VERIFIED"
+    }
+  ],
+  "api5e_live_evidence": {
+    "API-EV-071": {
+      "kind": "OPERATOR_REPORTED_REST",
+      "date": "2026-11-02",
+      "exact_execution_sha": "NOT_PROVIDED",
+      "login": "SUCCESS",
+      "physical_http_requests": 7,
+      "completed_gets": 6,
+      "device_mutations": 0,
+      "raw_private_export": false
+    },
+    "API-EV-072": {
+      "kind": "OPERATOR_REPORTED_WS_TRANSPORT",
+      "date": "2026-11-02",
+      "exact_execution_sha": "NOT_PROVIDED",
+      "login": "SUCCESS",
+      "ws_connections_attempted": 1,
+      "token_profile": "API_KEY_IN_SESSION_TOKEN_FIELD",
+      "ws_app_ping_sent": 1,
+      "raw_received_counter": 1,
+      "invalid_or_oversized_counter": 1,
+      "valid_event_count": 0,
+      "terminal_class": "CONNECTION_CLOSED_OR_ERROR",
+      "close_code": "UNKNOWN",
+      "ws_application_authenticated": "NOT_PROVEN",
+      "device_subscription": "NOT_PROVEN",
+      "device_mutations": 0
+    }
+  },
+  "api5e_websocket": {
+    "evidence": "API-EV-072",
+    "valid_named_server_events": 0,
+    "invalid_received_items": 1,
+    "ws_application_auth": "UNVERIFIED",
+    "ws_subscription": "UNVERIFIED",
+    "socket_close_reason": "UNKNOWN",
+    "opcode": "UNKNOWN",
+    "json_ping_sent": 1
+  },
+  "x-public-evidence-index": "../evidence/research-index.json"
+}

@@ -1,0 +1,1366 @@
+{
+  "asyncapi": "3.0.0",
+  "id": "urn:orbit-bhyve:unofficial:research-only",
+  "info": {
+    "title": "Orbit B-hyve FULL client-source WS inventory — INERT",
+    "version": "0.1.0",
+    "description": "Client-perspective message candidates only; no live Orbit WS verification or authorization. Dummy server."
+  },
+  "servers": {
+    "nonRoutable": {
+      "host": "example.invalid",
+      "protocol": "wss",
+      "pathname": "/",
+      "description": "No connection or server equivalence: documentation placeholder only.",
+      "x-inert": true
+    }
+  },
+  "defaultContentType": "application/json",
+  "channels": {
+    "wsCandidate": {
+      "address": "/v1/events",
+      "description": "Source-constructed candidate address, not a verified Orbit WSS URL; both client directions do not establish echo or acknowledgement.",
+      "messages": {
+        "app_connection": {
+          "$ref": "#/components/messages/app_connection"
+        },
+        "ping": {
+          "$ref": "#/components/messages/ping"
+        },
+        "pong": {
+          "$ref": "#/components/messages/pong"
+        },
+        "change_mode": {
+          "$ref": "#/components/messages/change_mode"
+        },
+        "rain_delay": {
+          "$ref": "#/components/messages/rain_delay"
+        },
+        "watering_in_progress_notification": {
+          "$ref": "#/components/messages/watering_in_progress_notification"
+        },
+        "watering_complete": {
+          "$ref": "#/components/messages/watering_complete"
+        },
+        "skip_active_station": {
+          "$ref": "#/components/messages/skip_active_station"
+        },
+        "program_changed": {
+          "$ref": "#/components/messages/program_changed"
+        },
+        "device_idle": {
+          "$ref": "#/components/messages/device_idle"
+        },
+        "device_connected": {
+          "$ref": "#/components/messages/device_connected"
+        },
+        "battery_status": {
+          "$ref": "#/components/messages/battery_status"
+        },
+        "device_status": {
+          "$ref": "#/components/messages/device_status"
+        },
+        "fault": {
+          "$ref": "#/components/messages/fault"
+        },
+        "clear_low_battery": {
+          "$ref": "#/components/messages/clear_low_battery"
+        },
+        "sync": {
+          "$ref": "#/components/messages/sync"
+        },
+        "fs_identify": {
+          "$ref": "#/components/messages/fs_identify"
+        },
+        "set_manual_preset_runtime": {
+          "$ref": "#/components/messages/set_manual_preset_runtime"
+        },
+        "program_list": {
+          "$ref": "#/components/messages/program_list"
+        },
+        "program_save": {
+          "$ref": "#/components/messages/program_save"
+        },
+        "program_delete": {
+          "$ref": "#/components/messages/program_delete"
+        },
+        "program_enable": {
+          "$ref": "#/components/messages/program_enable"
+        },
+        "program_disable": {
+          "$ref": "#/components/messages/program_disable"
+        },
+        "device_disconnected": {
+          "$ref": "#/components/messages/device_disconnected"
+        },
+        "flow_sensor_state_changed": {
+          "$ref": "#/components/messages/flow_sensor_state_changed"
+        },
+        "set_manual_preset_time": {
+          "$ref": "#/components/messages/set_manual_preset_time"
+        }
+      },
+      "x-address-not-verified": true
+    }
+  },
+  "operations": {
+    "send_WS_01_app_connection": {
+      "action": "send",
+      "summary": "OUTBOUND_AUTH app_connection: ws credential accepted/ack not established",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/app_connection"
+        }
+      ],
+      "x-entry-id": "WS-01",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "WS_APPROVAL_REQUIRED",
+      "x-evidence-id": "A3-E01"
+    },
+    "send_WS_02_ping": {
+      "action": "send",
+      "summary": "OUTBOUND_KEEPALIVE ping: JSON ping distinct from RFC6455 PING",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/ping"
+        }
+      ],
+      "x-entry-id": "WS-02",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "WS_APPROVAL_REQUIRED",
+      "x-evidence-id": "A3-E02"
+    },
+    "receive_WS_03_pong": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED pong: application JSON pong not independently observed",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/pong"
+        }
+      ],
+      "x-entry-id": "WS-03",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E03"
+    },
+    "send_WS_04_change_mode": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL change_mode: changes controller mode; no command execution",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/change_mode"
+        }
+      ],
+      "x-entry-id": "WS-04",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E04"
+    },
+    "receive_WS_05_change_mode": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED change_mode: notification not acknowledgement",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/change_mode"
+        }
+      ],
+      "x-entry-id": "WS-05",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E05"
+    },
+    "send_WS_06_rain_delay": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL rain_delay: may change watering policy; distinct REST methods",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/rain_delay"
+        }
+      ],
+      "x-entry-id": "WS-06",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E06"
+    },
+    "receive_WS_07_rain_delay": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED rain_delay: notification not acknowledgement",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/rain_delay"
+        }
+      ],
+      "x-entry-id": "WS-07",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E07"
+    },
+    "receive_WS_08_watering_in_progress_notification": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED watering_in_progress_notification: fields/types/ordering unverified",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/watering_in_progress_notification"
+        }
+      ],
+      "x-entry-id": "WS-08",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E08"
+    },
+    "receive_WS_09_watering_complete": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED watering_complete: server delivery not independently observed",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/watering_complete"
+        }
+      ],
+      "x-entry-id": "WS-09",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E09"
+    },
+    "receive_WS_10_skip_active_station": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED skip_active_station: no identified paired send",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/skip_active_station"
+        }
+      ],
+      "x-entry-id": "WS-10",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E10"
+    },
+    "receive_WS_11_program_changed": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED program_changed: not an acknowledgement of program_save",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/program_changed"
+        }
+      ],
+      "x-entry-id": "WS-11",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E11"
+    },
+    "receive_WS_12_device_idle": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED device_idle: server delivery not independently observed",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/device_idle"
+        }
+      ],
+      "x-entry-id": "WS-12",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E12"
+    },
+    "receive_WS_13_device_connected": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED device_connected: server delivery not independently observed",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/device_connected"
+        }
+      ],
+      "x-entry-id": "WS-13",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E13"
+    },
+    "receive_WS_14_battery_status": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED_GROUP battery_status: three source-defined candidate names grouped by A3",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/battery_status"
+        }
+      ],
+      "x-entry-id": "WS-14",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E14"
+    },
+    "receive_WS_14_device_status": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED_GROUP device_status: three source-defined candidate names grouped by A3",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/device_status"
+        }
+      ],
+      "x-entry-id": "WS-14",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E14"
+    },
+    "receive_WS_14_fault": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED_GROUP fault: three source-defined candidate names grouped by A3",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/fault"
+        }
+      ],
+      "x-entry-id": "WS-14",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E14"
+    },
+    "receive_WS_15_clear_low_battery": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED clear_low_battery: handler alone not server evidence",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/clear_low_battery"
+        }
+      ],
+      "x-entry-id": "WS-15",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "A3-E15"
+    },
+    "send_WS_16_sync": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL sync: not proven passive; can trigger device state",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/sync"
+        }
+      ],
+      "x-entry-id": "WS-16",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E16"
+    },
+    "send_WS_17_fs_identify": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL fs_identify: explicit device action",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/fs_identify"
+        }
+      ],
+      "x-entry-id": "WS-17",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E17"
+    },
+    "send_WS_18_set_manual_preset_runtime": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL set_manual_preset_runtime: vendored source only; state change",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/set_manual_preset_runtime"
+        }
+      ],
+      "x-entry-id": "WS-18",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E18"
+    },
+    "send_WS_19_program_list": {
+      "action": "send",
+      "summary": "OUTBOUND_UNPROVEN_READ program_list: client placeholder [] not vendor response; could trigger action",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/program_list"
+        }
+      ],
+      "x-entry-id": "WS-19",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E19"
+    },
+    "send_WS_20_program_save": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL program_save: create/update program",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/program_save"
+        }
+      ],
+      "x-entry-id": "WS-20",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E20"
+    },
+    "send_WS_21_program_delete": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL program_delete: delete program",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/program_delete"
+        }
+      ],
+      "x-entry-id": "WS-21",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E21"
+    },
+    "send_WS_22_program_enable": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL program_enable: enable program",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/program_enable"
+        }
+      ],
+      "x-entry-id": "WS-22",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E22"
+    },
+    "send_WS_23_program_disable": {
+      "action": "send",
+      "summary": "OUTBOUND_CONTROL program_disable: disable program",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/program_disable"
+        }
+      ],
+      "x-entry-id": "WS-23",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "DOC_ONLY_DO_NOT_SEND",
+      "x-evidence-id": "A3-E23"
+    },
+    "receive_WS_26_device_disconnected": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED device_disconnected: Groovy child handles event but server delivery and fields unverified",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/device_disconnected"
+        }
+      ],
+      "x-entry-id": "WS-26",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "API-EV-058"
+    },
+    "receive_WS_27_flow_sensor_state_changed": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED flow_sensor_state_changed: Groovy child handles event; response shape not verified",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/flow_sensor_state_changed"
+        }
+      ],
+      "x-entry-id": "WS-27",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "API-EV-058"
+    },
+    "receive_WS_28_set_manual_preset_time": {
+      "action": "receive",
+      "summary": "INBOUND_HANDLED set_manual_preset_time: Groovy inbound handler name differs from outbound set_manual_preset_runtime; do not equate",
+      "description": "Source-derived CLIENT action/handler only. No server frame, handshake, reply, echo or effect verified. Do not connect or transmit.",
+      "channel": {
+        "$ref": "#/channels/wsCandidate"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/wsCandidate/messages/set_manual_preset_time"
+        }
+      ],
+      "x-entry-id": "WS-28",
+      "x-provenance": "SOURCE_ONLY",
+      "x-execution-policy": "DO_NOT_EXECUTE",
+      "x-risk-gate": "OBSERVATIONAL_WS_ONLY",
+      "x-evidence-id": "API-EV-024"
+    }
+  },
+  "components": {
+    "messages": {
+      "app_connection": {
+        "name": "app_connection",
+        "title": "Third-party client source: app_connection",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "app_connection"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-01",
+            "direction": "OUTBOUND_AUTH",
+            "evidence": "A3-E01",
+            "gate": "WS_APPROVAL_REQUIRED"
+          }
+        ],
+        "x-first-party-client-send-reported": true,
+        "x-server_acceptance": "UNVERIFIED"
+      },
+      "ping": {
+        "name": "ping",
+        "title": "Third-party client source: ping",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "ping"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-02",
+            "direction": "OUTBOUND_KEEPALIVE",
+            "evidence": "A3-E02",
+            "gate": "WS_APPROVAL_REQUIRED"
+          }
+        ],
+        "x-first-party-client-send-reported": true
+      },
+      "pong": {
+        "name": "pong",
+        "title": "Third-party client source: pong",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "pong"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-03",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E03",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ],
+        "x-first-party-server_receive_observed": false
+      },
+      "change_mode": {
+        "name": "change_mode",
+        "title": "Third-party client source: change_mode",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "change_mode"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-04",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E04",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          },
+          {
+            "id": "WS-05",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E05",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "rain_delay": {
+        "name": "rain_delay",
+        "title": "Third-party client source: rain_delay",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "rain_delay"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-06",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E06",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          },
+          {
+            "id": "WS-07",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E07",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "watering_in_progress_notification": {
+        "name": "watering_in_progress_notification",
+        "title": "Third-party client source: watering_in_progress_notification",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "watering_in_progress_notification"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-08",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E08",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "watering_complete": {
+        "name": "watering_complete",
+        "title": "Third-party client source: watering_complete",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "watering_complete"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-09",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E09",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "skip_active_station": {
+        "name": "skip_active_station",
+        "title": "Third-party client source: skip_active_station",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "skip_active_station"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-10",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E10",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "program_changed": {
+        "name": "program_changed",
+        "title": "Third-party client source: program_changed",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "program_changed"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-11",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E11",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "device_idle": {
+        "name": "device_idle",
+        "title": "Third-party client source: device_idle",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "device_idle"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-12",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E12",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "device_connected": {
+        "name": "device_connected",
+        "title": "Third-party client source: device_connected",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "device_connected"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-13",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E13",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "battery_status": {
+        "name": "battery_status",
+        "title": "Third-party client source: battery_status",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "battery_status"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-14",
+            "direction": "INBOUND_HANDLED_GROUP",
+            "evidence": "A3-E14",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "device_status": {
+        "name": "device_status",
+        "title": "Third-party client source: device_status",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "device_status"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-14",
+            "direction": "INBOUND_HANDLED_GROUP",
+            "evidence": "A3-E14",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "fault": {
+        "name": "fault",
+        "title": "Third-party client source: fault",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "fault"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-14",
+            "direction": "INBOUND_HANDLED_GROUP",
+            "evidence": "A3-E14",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "clear_low_battery": {
+        "name": "clear_low_battery",
+        "title": "Third-party client source: clear_low_battery",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "clear_low_battery"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-15",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "A3-E15",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "sync": {
+        "name": "sync",
+        "title": "Third-party client source: sync",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "sync"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-16",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E16",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "fs_identify": {
+        "name": "fs_identify",
+        "title": "Third-party client source: fs_identify",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "fs_identify"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-17",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E17",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "set_manual_preset_runtime": {
+        "name": "set_manual_preset_runtime",
+        "title": "Third-party client source: set_manual_preset_runtime",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "set_manual_preset_runtime"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-18",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E18",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "program_list": {
+        "name": "program_list",
+        "title": "Third-party client source: program_list",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "program_list"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-19",
+            "direction": "OUTBOUND_UNPROVEN_READ",
+            "evidence": "A3-E19",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "program_save": {
+        "name": "program_save",
+        "title": "Third-party client source: program_save",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "program_save"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-20",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E20",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "program_delete": {
+        "name": "program_delete",
+        "title": "Third-party client source: program_delete",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "program_delete"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-21",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E21",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "program_enable": {
+        "name": "program_enable",
+        "title": "Third-party client source: program_enable",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "program_enable"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-22",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E22",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "program_disable": {
+        "name": "program_disable",
+        "title": "Third-party client source: program_disable",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "program_disable"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-23",
+            "direction": "OUTBOUND_CONTROL",
+            "evidence": "A3-E23",
+            "gate": "DOC_ONLY_DO_NOT_SEND"
+          }
+        ]
+      },
+      "device_disconnected": {
+        "name": "device_disconnected",
+        "title": "Third-party client source: device_disconnected",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "device_disconnected"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-26",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "API-EV-058",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "flow_sensor_state_changed": {
+        "name": "flow_sensor_state_changed",
+        "title": "Third-party client source: flow_sensor_state_changed",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "flow_sensor_state_changed"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-27",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "API-EV-058",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      },
+      "set_manual_preset_time": {
+        "name": "set_manual_preset_time",
+        "title": "Third-party client source: set_manual_preset_time",
+        "contentType": "application/json",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "string",
+              "const": "set_manual_preset_time"
+            }
+          },
+          "required": [
+            "event"
+          ],
+          "additionalProperties": true
+        },
+        "x-unverified-server-payload": true,
+        "x-directions": [
+          {
+            "id": "WS-28",
+            "direction": "INBOUND_HANDLED",
+            "evidence": "API-EV-024",
+            "gate": "OBSERVATIONAL_WS_ONLY"
+          }
+        ]
+      }
+    }
+  },
+  "x-documentation-only": true,
+  "x-source-commit": "e393dc326a84c22aa1587e71456010bf6219ac87",
+  "x-unmodeled-in-json": [
+    {
+      "id": "WS-24",
+      "description": "RFC6455 PING/PONG",
+      "direction": "TRANSPORT_CONTROL",
+      "evidence": "A3-E24",
+      "reason": "RFC6455 transport frames are NOT JSON application events."
+    },
+    {
+      "id": "WS-25",
+      "description": "generic event handler",
+      "direction": "INBOUND_GENERIC",
+      "evidence": "A3-E25",
+      "reason": "Generic dispatcher does NOT identify a named server-emitted event."
+    }
+  ],
+  "x-transport-frame-separate": true,
+  "x-first-party-transmission-evidence": {
+    "evidence": "API-EV-072",
+    "date": "2026-11-02",
+    "ws_receive_loop_reached": true,
+    "json_app_ping_sent": 1,
+    "received_counter": 1,
+    "invalid_or_oversized_counter": 1,
+    "valid_named_server_events": 0,
+    "application_auth": "NOT_VERIFIED",
+    "subscription": "NOT_VERIFIED",
+    "remote_close_code": "UNKNOWN",
+    "cause": "UNKNOWN"
+  }
+}

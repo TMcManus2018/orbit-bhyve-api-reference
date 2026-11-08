@@ -1,0 +1,1020 @@
+{
+  "schema": "orbit-bhyve-public-evidence-index-v1",
+  "source_ledger_record_count": 73,
+  "public_summaries_are_full_records": false,
+  "records": [
+    {
+      "id": "API-EV-001",
+      "summary": "First-party session and generic authenticated request behavior",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED (project implementation)",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Required individual headers and universal current response keys are unproven",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-002",
+      "summary": "First-party ordered account/device discovery candidate routes",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED for implementation, INFERRED for successful operation of individual fallbacks",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "A fallback may never be exercised for a given account",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-003",
+      "summary": "First-party GET device asset link and parsed asset index",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED (existing working project)",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Index and daily payload are different resources",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-004",
+      "summary": "Orbit-hosted daily entries are authenticated, external index/asset URLs omit Orbit credentials; legacy-asset handling",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED (implementation)",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Credential selection is host based in this client",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-005",
+      "summary": "First-party watering history pagination probe with page and per-page",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED for implementation and historical live use",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Mock tests do not confirm live server caps; probe ends on a short page relative to requested per-page",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-006",
+      "summary": "August 8, 2026 live history: 38 top-level records, 648 nested irrigation records; 10-page-size pagination and 100-page-size single request; nested irrigation range April 7–August 7, 2026",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED historical recorded experiment",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Does not establish stable general limits, current retention, or response format for other accounts",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-007",
+      "summary": "July 25 REST/asset exact irrigation-field match; August 7 asset watering_events: null versus 21 REST irrigation entries",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED as documented first-party historical comparison",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Two dates do not determine systemic completeness",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-008",
+      "summary": "Manual pagination of watering history was reported in October 2026, before the direct-HTTP paging matrix. Pages 1–4 displayed 14 top-level containers each, page 5 displayed eight, and page 6 returned HTTP 200 with an empty JSON array. The earliest top-level container date reported was April 27, 2026; an attempted page size of 28 was inconclusive.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED MANUAL BROWSER OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "A browser or inspection tool may not transmit the intended query parameters. Top-level container dates and nested irrigation timestamps are different. This observation does not establish a retention limit or a server-enforced page size.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-009",
+      "summary": "Older Python implementation uses REST Orbit-Session-Token, login orbit_session_token and history page/per-page",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED client code",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sebr/pybhyve/blob/df8316f174bf3cf18db34d62c378b5da6af1c8fc/pybhyve/client.py#L50-L138",
+        "https://github.com/sebr/pybhyve/blob/df8316f174bf3cf18db34d62c378b5da6af1c8fc/pybhyve/const.py"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-010",
+      "summary": "Home Assistant vendored client sends orbit-api-key and Orbit-Session-Token, reads login orbit_api_key, requests watering_events/landscapes",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED derivative implementation",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not independent of older pybhyve lineage",
+      "public_source_pins": [
+        "https://github.com/sebr/bhyve-home-assistant/blob/8c01eeb818c86614db39d593334c28d74889ef38/custom_components/bhyve/pybhyve/client.py",
+        "https://github.com/sebr/bhyve-home-assistant/blob/8c01eeb818c86614db39d593334c28d74889ef38/custom_components/bhyve/pybhyve/const.py"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-011",
+      "summary": "Login/browser header and returned token behavior changed or varied in 2026",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "CONTRADICTED across third-party timeline/report",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Issue narrative is not a first-party live test; cannot claim universal current field names",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-012",
+      "summary": "YardRelay prefers REST API key, falls back to session token, guards redirect credential forwarding and 401/403",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L123-L158"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-013",
+      "summary": "Home Assistant/MCP vendored modules share constants; MCP adds history paging",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED, dependent lineage",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/norman2112/bhyve-mcp/blob/ec3a312d7020e51784a36b5e5fe03f97f6106d94/src/bhyve_mcp/pybhyve/client.py#L276-L298"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-014",
+      "summary": "YardRelay GET history page/per-page/t, programs listing, PUT program body, and WebSocket command examples",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L156-L265"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-015",
+      "summary": "Hubitat constructs GET zone_reports/{id}, event_logs/{id}, landscape_descriptions/{id} plus users, feedback and meshes",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED request construction; successful responses UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L432-L483"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-016",
+      "summary": "Homebridge uses GET device, meshes, topology-with-ID, POST graph2 and GET timer programs",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "network_topologies without ID not observed",
+      "public_source_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L69-L315"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-017",
+      "summary": "Home Assistant implements GET landscapes, PUT landscape landscape_description, PUT program sprinkler_timer_program and PUT device device",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sebr/bhyve-home-assistant/blob/8c01eeb818c86614db39d593334c28d74889ef38/custom_components/bhyve/pybhyve/client.py#L283-L301"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [
+        "REST-27"
+      ]
+    },
+    {
+      "id": "API-EV-018",
+      "summary": "Separate Python client creates, updates and deletes programs using REST",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L190-L244"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-019",
+      "summary": "Dashboard constructs forecast, landscape and REST control routes",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED route construction; success UNVERIFIED for individual operations",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L145-L344"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-020",
+      "summary": "Node client uses login orbit_session_token, REST session header and authenticated WebSocket app_connection",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/billchurch/bhyve-api/blob/c1d6a58259e60a24dcb95732cbef4f5bbb489718/src/index.js#L61-L136",
+        "https://github.com/billchurch/bhyve-api/blob/c1d6a58259e60a24dcb95732cbef4f5bbb489718/src/ConfigManager.js"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-021",
+      "summary": "app_connection and ping in older Python client WebSocket",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sebr/pybhyve/blob/df8316f174bf3cf18db34d62c378b5da6af1c8fc/pybhyve/websocket.py#L56-L100"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-022",
+      "summary": "Home Assistant WebSocket origin, token message, ping and reconnection",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED derivative client",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sebr/bhyve-home-assistant/blob/8c01eeb818c86614db39d593334c28d74889ef38/custom_components/bhyve/pybhyve/websocket.py#L86-L220"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-023",
+      "summary": "YardRelay WebSocket subscription, change_mode, rain_delay, ping and reconnect",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L184-L386"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-024",
+      "summary": "Hubitat WebSocket inbound notification handling and outbound control",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-sprinkler-timer.groovy#L172-L361"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [
+        "WS-28"
+      ]
+    },
+    {
+      "id": "API-EV-025",
+      "summary": "openHAB WebSocket notifications and controller change_mode commands",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/openhab/openhab-addons/blob/391d63d8597d9b5b535ee83c85f557cad4fba2c7/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-026",
+      "summary": "Homebridge uses change_mode, sync, fs_identify and WebSocket reconnection",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L328-L651"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-027",
+      "summary": "Asset-zone-report extractor reads top-level zone_reports[]; no REST response assumption",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED local implementation",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-028",
+      "summary": "Asset watering extractor reads watering_events.irrigation[] and recognized field sets",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED local implementation; REST compatibility limited to historical tests",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-029",
+      "summary": "RF-3 normalize_assets receives decoded NormalizationAsset values and sorts dataset rows",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED local implementation",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-030",
+      "summary": "Direct workbook's bounded overlap, strict rebuild and dataset replacement semantics",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "VERIFIED local implementation",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-031",
+      "summary": "WebSocket control message event names and receiving frames in a separate Python client",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L103-L188"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-032",
+      "summary": "openHAB parses login orbit_session_token and sends it in REST requests",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/openhab/openhab-addons/blob/391d63d8597d9b5b535ee83c85f557cad4fba2c7/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/model/OrbitBhyveSessionResponse.java",
+        "https://github.com/openhab/openhab-addons/blob/391d63d8597d9b5b535ee83c85f557cad4fba2c7/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L138-L152"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-033",
+      "summary": "In an operator-run, read-only API-2 experiment on October 24, 2026, the July 25, 2026 live daily asset was successfully obtained using an explicitly selected one-hop Orbit-to-S3 redirect and compared with the complete, non-overlapping REST traversal for that test",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "OPERATOR-REPORTED LIVE OBSERVATION (sanitized diagnostic output)",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Verified for only one identified nested record on the target date; does not imply global completeness or a current result for August 7. Original private records and signed URLs were neither shared nor committed",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-034",
+      "summary": "In a read-only API-2 experiment on October 24, 2026, a fresh, live August 7, 2026 daily asset and REST watering-event history both contained 21 identifiable nested irrigation events; the comparator matched all 21 without recognized-field differences",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "OPERATOR-REPORTED LIVE OBSERVATION (sanitized diagnostic output)",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Cause of the difference between observations is unknown, and no general retention, consistency, or completeness guarantee is inferred. The user provided report excerpts, not original private records",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-035",
+      "summary": "The October 24, 2026 API-2 historical REST/asset comparison performed a bounded watering-history traversal. With requested per-page=14, the selected traversal observed 67 top-level history containers, zero duplicate-container observations and an EMPTY_PAGE termination, reported as pagination_exhausted=true.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Applies only to the selected current collection, account and date. Exhausting this traversal does not establish complete archived watering history or a vendor retention limit.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-036",
+      "summary": "The October 24, 2026 API-2 direct-HTTP matrix compared selected watering-history pagination sizes. Requested per-page values 10, 14, 28, 50 and 100 yielded first/second-page counts 10/10, 14/14, 28/28, 50/17 and 67/0 respectively (HTTP 200). The run used 32 physical requests. Full 10- and 14-item traversals each found 67 containers and 831 nested irrigation records, no observed duplicate containers, and empty-page termination.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Direct HTTP paging behaviour differed from an earlier browser report. These are bounded observations of one collection, not a stable pagination specification or proof of a fixed history-retention period.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-037",
+      "summary": "The October 24, 2026 authenticated API-2 matrix tested specific login fields and header omissions. The selected session response contained orbit_api_key and user/account identifier fields but no orbit_session_token. An API-key GET /v1/devices returned HTTP 200. Omitting Orbit-App-Id yielded HTTP 401; omitting Origin, Referer or User-Agent individually yielded HTTP 200 in the tested profile.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE AUTHENTICATION OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Field presence and HTTP statuses apply to one session, account and endpoint. No universal credential/header contract, session-token non-support or downstream forwarding rule was established.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-038",
+      "summary": "A read-only API-2 endpoints experiment on October 25, 2026 inspected five fixed first-party REST routes. GET /v1/devices returned HTTP 200 with one device; GET /v1/zone_reports/{device_id} returned HTTP 302 without following the redirect; GET /v1/event_logs/{device_id} returned HTTP 200 with 100 elements; GET /v1/bhyve_accounts/{account_id} returned HTTP 200 with an object containing recognized top-level keys created_at, id and name; GET /v1/bhyve_accounts/{account_id}/devices returned HTTP 404. The selected run used 11 physical requests.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The 100-item event-log array is not proven to be the full history; the 404 is account/profile-specific. No redirected zone-report body was read. Response keys were from a limited recognition set, not complete universal schemas.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-039",
+      "summary": "The October 26, 2026 API-4B/C read-only GET matrix evaluated selected routes from client-source research. Of 14 attempted GETs, ten returned HTTP 200, one zone-report GET returned HTTP 302 and three returned HTTP 404 (landscapes, weather forecast and nested account-devices). Four additional candidate routes were NOT_TESTED because suitable owner-bound identifier values were not available.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "A counted probe is not necessarily a physical-request total, and the 404 results do not establish universal endpoint absence. Unprobed ID-dependent routes must not be reclassified as 404.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-040",
+      "summary": "The October 26, 2026 API-4C experiment tested event-log pagination separately from watering-history pagination. An unparameterized event-logs GET returned an HTTP 200 array of 100. Explicit page=1&per-page=10 returned HTTP 200 with 100 entries; page=2&per-page=10 returned HTTP 200 with an empty array. The selected page-one and page-two payloads were unequal.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "These results do not establish a 100-item total, universal cap, reliable pagination or global ignoring of per-page. The watering-history route has different observed paging behaviour.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-041",
+      "summary": "The October 26, 2026 API-4B zone-report GET was classified without following the server redirect. GET /v1/zone_reports/{device_id} returned HTTP 302. The Location was HTTPS to a recognized Orbit-associated S3 host family, with an OTHER_PATH not matching the existing validated daily-asset allowlist; the target was NOT_FOLLOWED_UNVERIFIED_DESTINATION.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REDIRECT CLASSIFICATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Host-family recognition does not authenticate or authorize an arbitrary signed object path. The target resource, payload, exact URL, signed query and content type were not verified.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-042",
+      "summary": "The October 26, 2026 API-4C experiment tested three candidate routes previously known principally from public client source. GET /v1/devices/{device_id} returned HTTP 200 with a JSON object; GET /v1/landscape_descriptions/{device_id} returned HTTP 200 with an eight-element array; GET /v1/sprinkler_timer_programs returned HTTP 200 with a five-element array. Recognized device fields included id, name, status, num_stations and zones; recognized landscape/program rows included id, device_id and created_at.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Allowlisted field names and array counts do not determine all keys, field types, requiredness, nested structure or cross-account behaviour.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-043",
+      "summary": "A corrected API-4B zone-redirect classifier completed a selected October 27, 2026 observation. One login and one zone-report GET used two physical requests. The GET returned HTTP 302 with a structurally categorized HTTPS Orbit-associated S3 destination, four to seven path segments, a selected-device segment and AWS-v4 query-field presence. Existing daily-asset allowlist match=false; authorized_to_follow=false; follow-up target requests=0.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REDIRECT CLASSIFICATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The target path, signed values and response body were not retrieved. The earlier classifier error was a local implementation defect. These observations are not authority to broaden destination rules.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-044",
+      "summary": "An October 27, 2026 API-4A comparison of July 25 watering history preceded the timestamp-label parser correction. The bounded run used 12 requests, observed 67 history containers and a successfully acquired one-event daily asset, but rest_structure_valid=false. The comparison was INCONCLUSIVE; its reported zero in-scope REST count resulted from rejecting the invalidly parsed collection.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST/ASSET AUDIT",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "A failed structural parser is not proof of zero historical events. Neither agreement nor disagreement could be established in that run; an earlier API-2 comparison result was not thereby invalidated.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-045",
+      "summary": "A follow-up October 27, 2026 audit narrowed the reason the prior July 25 comparison failed. Across 67 returned history containers, the strict parser classified noncanonical_or_invalid_date=67 and timestamp_like_date=67 while accepting zero containers. Counts for malformed/missing/null irrigation categories were zero. REST traversal still ended with EMPTY_PAGE and rest_structure_valid=false.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST/ASSET AUDIT",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The aggregates suggest full timestamp-like labels rather than expected date-only strings but do not prove exact syntax/time zones. The parser failure cannot be interpreted as absence of watering.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-046",
+      "summary": "A corrected timestamp-aware API-4A audit on October 27, 2026 revisited July 25 watering events. All 67 history containers were structurally accepted; their date labels were full timestamps with offsets. With 12 physical requests and EMPTY_PAGE completion, the selected date had one REST event and one asset event, one provisional identity match, zero source-only entries, no recognized-field conflicts and an AGREEMENT classification.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST/ASSET COMPARISON",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "One-date, selected-field agreement does not prove general REST/archive equivalence, complete retention or universal event-identity semantics.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-047",
+      "summary": "An October 27, 2026 timestamp-aware API-4A audit compared August 7 REST and daily-asset watering events. The bounded run used 12 requests, reported valid REST structure and EMPTY_PAGE traversal, then found 21 REST events and 21 asset events. All 21 provisional identities matched, with no REST-only/asset-only events, recognized-field conflicts or date-boundary uncertainty; the selected date was classified AGREEMENT.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST/ASSET COMPARISON",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The comparison proves only the selected-date observed fields. An earlier report of watering_events:null for that date remains an unresolved versioning/source discrepancy.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-048",
+      "summary": "Two newer REST clients disagree on token preference: JP selects orbit_session_token before orbit_api_key and sends both REST token-header names; YardRelay selects API-key first and uses a session-token header only as fallback",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED client source; cross-token acceptance UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/jordanpwalsh/bhyve-api/blob/3f6f7e90a53db98f8bcb4dcac682034b5c31cf3c/src/login.ts#L71-L79",
+        "https://github.com/jordanpwalsh/bhyve-api/blob/3f6f7e90a53db98f8bcb4dcac682034b5c31cf3c/src/bhyve-api.ts#L11-L27",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L120-L143",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L489-L505"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-049",
+      "summary": "Maintained Home Assistant Python derivative obtains orbit_api_key, sends both token-named REST headers and populates a WS app_connection.orbit_session_token property using its stored token",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED dependent/vendored source; REST-to-WS credential compatibility UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/client.py#L75-L85",
+        "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/client.py#L188-L210",
+        "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/websocket.py#L130-L148"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-050",
+      "summary": "Third-party clients construct distinct query forms user, user_id or t for GET devices, device_id/t for programs, and page/per-page/t for watering history; dashboard's local Flask input per_page is emitted upstream as per-page",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED construction; query equivalence, filter effects and universal paging UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L69-L83",
+        "https://github.com/billchurch/bhyve-api/blob/c1d6a58259e60a24dcb95732cbef4f5bbb489718/src/index.js#L98-L105",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L156-L173",
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L145-L162"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-051",
+      "summary": "Python dashboard locally substitutes JSON [] for some upstream weather_forecast/{device_id} and landscapes errors/non-200 responses",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED client fallback; actual Orbit empty-result behaviour UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/jesimpsonjr-tech/bhyve-dashboard/blob/0df29724fe88bd509b0e5d87eca3f93f5359f117/bhyve_server.py#L185-L221"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-052",
+      "summary": "Client WebSocket keepalive uses distinct JSON application ping/pong and RFC 6455 transport PING/PONG channels; HA configures aiohttp transport heartbeat as well as JSON ping, while Go installs transport-frame handlers plus JSON ping",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED; server timing/deadline and actual emitted frames UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/sebr/bhyve-home-assistant/blob/43fd888a9ecb9e914f4f0b1d0d818c3218c48e95/custom_components/bhyve/pybhyve/websocket.py#L95-L150",
+        "https://github.com/gillcaleb/orbit-bhyve-go-client/blob/bc05a2aa8ef2e067e37b0bf14cffa02958162d63/pkg/websocket/websocket.go#L41-L79",
+        "https://github.com/sunnierseattle/bhyve/blob/d68f5c15a8a711c44a389864c41d51ccf311fac4/bhyve.py#L149-L168"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-053",
+      "summary": "Source inspection of the willioz Python client identified program-related WebSocket send constructs. Client code constructs program_list, program_save, program_delete, program_enable and program_disable. The list method returns an empty placeholder list after sending instead of a verified vendor response.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "THIRD-PARTY SOURCE-ONLY WEBSOCKET CANDIDATES",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Source code does not prove WebSocket server receipt, acknowledgement, accepted payload shape or program mutations. These are potentially state-changing candidates, not instructions to send them.",
+      "public_source_pins": [
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L349-L390",
+        "https://github.com/willioz/Obit-bhyve-python-package/blob/3cb75ca86e4124851b93d178b7dcb1611e742a31/orbit_bhyve/client.py#L392-L489"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-054",
+      "summary": "Swift decoder handles incoming watering_in_progress_notification, watering_complete, device_idle, battery_status, rain_delay, program_changed, device_status, and fault, often defaulting missing fields",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED INBOUND-HANDLED parser; server emission and field requiredness UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/WebSocket/BHyveEvent.swift#L14-L55"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-055",
+      "summary": "Both change_mode and rain_delay are built as outgoing WS messages by one client and handled as incoming notifications by another; common names do not prove acknowledgement, echo or state change",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED directions; any correspondence INFERRED/UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L200-L240",
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L262-L309"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-056",
+      "summary": "The A3 resource graph connects client-named accounts/devices, zones, programs, histories, logs, assets and WS subscriptions; it is SOURCE-INFERRED, not a vendor-provided graph and not evidence of POST /v1/graph2 semantics",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "INFERRED relationship model; actual graph2 response UNVERIFIED",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/valiquette/homebridge-orbit-irrigation/blob/80a0731f633d8bedf941f14820975d58e4504e9d/src/orbitapi.ts#L225-L257",
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L242-L252"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-057",
+      "summary": "Comparative source inspection highlighted practices relevant to credential and WebSocket-frame handling. The YardRelay implementation explicitly avoids automatic REST redirect following, while inspected Go, openHAB and blacksmithlabs code contained candidate token logging or WebSocket frame/logging behaviours.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "THIRD-PARTY SOURCE-ONLY SECURITY OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Code-level risk indicators are not proof of runtime data disclosure, exploitation or a vendor security flaw. Do not reproduce potentially sensitive logging or unsafe redirect handling.",
+      "public_source_pins": [
+        "https://github.com/markse123/yardrelay-for-bhyve/blob/5f0717a766d5848d816d36be542e6b93dcb5f12e/server/orbit-client.js#L393-L430",
+        "https://github.com/gillcaleb/orbit-bhyve-go-client/blob/bc05a2aa8ef2e067e37b0bf14cffa02958162d63/pkg/client/client.go#L37-L62",
+        "https://github.com/openhab/openhab-addons/blob/e3eeb3e9a918d1abe9b2b351a5958b0c1f9df0d5/bundles/org.openhab.binding.orbitbhyve/src/main/java/org/openhab/binding/orbitbhyve/internal/handler/OrbitBhyveBridgeHandler.java#L427-L437",
+        "https://github.com/blacksmithlabs/orbit-bhyve-remote/blob/29ca8d4a37c477b33ad9b60ae6128eca6242d5db/src/lib/api.js#L35-L76"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-058",
+      "summary": "Hubitat's active orbit-bhyve-controller.groovy contains REST dispatch; its separate orbit-bhyve-sprinkler-timer.groovy actually connects WS, parses inbound device_disconnected, device_connected, flow_sensor_state_changed and other event labels, and sends app_connection and control commands",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED pinned Groovy code; server event delivery UNVERIFIED; fork family lineage dependent",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-controller.groovy#L432-L485",
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-sprinkler-timer.groovy#L138-L285",
+        "https://github.com/jpage4500/hubitat-drivers/blob/8c0466dd57f331e7828ff40443b35ea43946a183/orbit-bhyve/orbit-bhyve-sprinkler-timer.groovy#L288-L309"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [
+        "WS-26",
+        "WS-27"
+      ]
+    },
+    {
+      "id": "API-EV-059",
+      "summary": "Swift SessionResponse comments assert that orbit-app-id selection changes which token field the server returns and that a returned session token can fail WS authorization. These are author comments, not captured Orbit responses",
+      "summary_extraction": "EXPLICIT_CLAIM_FIELD",
+      "classification": "THIRD-PARTY OBSERVED commentary; universal token-type rule CONTRADICTED/UNVERIFIED across sources",
+      "classification_method": "EXPLICIT_LEDGER_CLASS",
+      "limits": "Not established beyond the evidence and conditions described in the private research record.",
+      "public_source_pins": [
+        "https://github.com/waitbutY/bhyve-swift/blob/eec9bd2b414953e7d9ad7c096901bea2aea7ebb1/Sources/BHyve/Auth/SessionResponse.swift#L3-L18"
+      ],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": []
+    },
+    {
+      "id": "API-EV-060",
+      "summary": "The owner separately authorized one API-5B/B3 first-party zone-report no-follow experiment. The operator reported one login and one fixed zone-report GET (two physical HTTP requests). The GET returned HTTP 302; execution state FIRST_PARTY_302_CLASSIFIED, and DENY_NOT_AUTHORIZED prevented the signed-target request. The target used an Orbit-associated S3 variant with an unpinned path and unrecognized query-key profile.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REDIRECT CLASSIFICATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Neither the object body nor its origin/authenticity was verified. The one-run authorization was consumed, and no broader allowlist or production access was approved.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-061",
+      "summary": "API-5C/C1 conducted a single authorized selected-device comparison of event-log pages and sprinkler programs. Six GETs plus one session POST used seven physical HTTP requests. Event-log page 1 with per-page=10 and =50 returned the same 100-element JSON array; page 2 for both sizes returned identical empty arrays. Programs with and without a device_id filter returned the same canonicalized five-element JSON array.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Event-log retention/cap and server paging rules remain unknown. Identical program arrays do not show whether the device_id filter was ignored or every program belonged to that device. No redirect target was followed or controller state modified.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [
+        "REST-05",
+        "REST-08"
+      ],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-062",
+      "summary": "API-5C/C2 tested fixed API-key REST header variants for a single session and device-list endpoint. One session POST and five GET requests used six physical requests. GET /v1/devices baseline, OMIT_ORIGIN, OMIT_REFERER and OMIT_USER_AGENT each returned HTTP 200 with identical one-device canonical JSON arrays. Omitting Orbit-App-Id returned HTTP 401. A session-token-only case was skipped because the login did not issue that field.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE AUTHENTICATION OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The apparent User-Agent omission may not remove a lower-level library default. These results do not establish global required headers, session-token invalidity or WebSocket authentication semantics.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [
+        "REST-02"
+      ],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-063",
+      "summary": "API-5C/C3 compared selected August 6–8, 2026 watering histories under a validated daily-asset-only follow policy. The run reported 16 physical requests, 68 REST history containers and 21 REST events in the selected window. August 7 had 21 REST events and 21 asset events matching on selected identity/field checks (AGREEMENT). August 6 and 8 had zero REST events but retrieved daily assets whose watering_events fields were explicit null, so both comparisons were INCONCLUSIVE.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST/DAILY-ASSET COMPARISON",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "A retrieved daily asset with watering_events:null is not a verified zero-event array. The three-day comparison does not establish general completeness; the unresolved zone-report S3 target was not requested.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [
+        "REST-04",
+        "REST-17",
+        "REST-18"
+      ],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-064",
+      "summary": "The owner provided activity/no-activity dates from their records to contextualize the August 6–8 comparison. They reported irrigation activity on August 4, 7, 9–13, 15, 17–20, 23–27 and 31, and no activity on August 6 or 8. The two no-activity reports were consistent with zero REST records plus daily-asset explicit null on those dates.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED EXTERNAL CALENDAR SUMMARY — NOT AN API REQUEST",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The records, their provenance, independence and exact per-day counts were not examined; activity reports are not API event totals. Null may mean inactivity on these dates but is not proven to mean zero events generally. No new Orbit request occurred.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-065",
+      "summary": "API-5C/C3G obtained a fixed eight-day selection of private archived daily assets and then checked those same saved files offline. Nineteen physical requests were reported; eight JSON documents and eight checksum sidecars (16 private files) were written. Six dates had populated irrigation arrays with counts 25, 21, 1, 8, 15 and 2 (72 total entries); two dates had explicit null. The subsequent checksum-verified local calendar reconciliation was day-level consistent for all eight selected dates.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED LIVE ASSET CAPTURE + OFFLINE SAME-FILE INTEGRITY CHECK",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The offline recheck is not independent vendor data; the separate owner calendar did not establish event counts. The two null entries remain structurally unknown, not zero arrays. Private archived files and identifiers are not published.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-066",
+      "summary": "API-5C/C4 evaluated unresolved REST routes against existing source-code candidates and earlier observations without new live calls. Seven routes were triaged: four were historically NOT_TESTED_ID_MISSING (mesh, topology, user, feedback); three had prior one-profile HTTP 404 results (landscapes, weather forecast, nested account-devices). This stage produced zero new route confirmations and no REST request.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "SOURCE-ONLY OFFLINE ROUTE AND IDENTIFIER RECONCILIATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Field presence is not permission to retrieve user information. Prior 404s are not proof of universal endpoint absence; a NOT_TESTED route is not a failed request. The decision matrix is offline analysis only.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-067",
+      "summary": "API-5C/C4-B scanned metadata fields in eight previously captured, checksum-verified local daily assets. The selected metadata positions contained mesh_id in 8/8 assets and user_id in 8/8, while topology_id, network_topology_id and bhyve_account_id were absent in those inspected positions. The scanner made zero network requests and did not output identifier values.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED OFFLINE LOCAL METADATA OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Presence alone does not establish field location, cross-date equality, owner binding, endpoint existence or authorization. These are local historical clues rather than live Orbit response tests.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-068",
+      "summary": "API-5C/C4-C compared identifier locations and equality across eight local, checksum-verified assets. mesh_id and user_id were both present in the immediate nested device metadata of all eight assets, with equal values respectively across the eight snapshots and no conflicting sampled positions. No root-level device_id was present in these files. The scanner made zero network requests and exported no ID values or hashes.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED OFFLINE LOCAL METADATA CONSISTENCY OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "Correlated snapshots from one controller are not independent owner-identity proof. Missing root device_id does not imply nested device identity mismatch. A later offline step was required to compare nested device.id.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-069",
+      "summary": "API-5C/C4-D inspected nested device identifiers in the same eight saved archive pairs. Nested device.id matched the privately selected controller in 8/8 assets; alternative immediate device.device_id was missing in all eight. Stable mesh_id and user_id fields appeared within each matched nested device metadata object. No network requests, controller changes, raw IDs or hashes were exported.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED OFFLINE LOCAL DEVICE-ASSOCIATION OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "These are correlated local archive snapshots, not current server attestations, authenticated owner binding, mesh GET authorization or proof of a universal resource relationship.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-070",
+      "summary": "API-5C/C4-E performed one independently authorized first-party GET of an owner-selected historical mesh reference. One login and one mesh GET used two physical requests. GET /v1/meshes/{mesh_id} returned HTTP 200, application/json and a JSON object with top-level id, devices (array) and created_at keys. The request used a reference validated against eight local archived device snapshots.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "This experiment did not compare returned id with requested mesh_id or inspect device array members, length or selected-controller membership. It does not establish full response schema or universal endpoint availability.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-071",
+      "summary": "API-5E/E1 conducted six selected first-party GET observations for a single account/controller on November 2, 2026. One login and six GETs totalled seven physical requests: /v1/users/{user_id} returned 200 and matched the selected user ID; /v1/user_feedback?user_id= returned 200 with 11 object records; /v1/landscapes, /v1/weather_forecast/{device_id} and nested account-devices each returned 404; /v1/meshes/{mesh_id} returned 200, matching the selected mesh ID and exposing a one-object devices array.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE REST OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The user-feedback content was not exported. The mesh array record included a device_id key but its value was not compared to the selected controller. Three 404s are account/profile-specific; no complete schema or global support claim is warranted.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [
+        "REST-09",
+        "REST-11",
+        "REST-12",
+        "REST-13",
+        "REST-14",
+        "REST-16"
+      ],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-072",
+      "summary": "API-5E/E2 inspected a single selected WebSocket connection after one owner-account login. The owner reported one WSS attempt, one app_connection using the REST API key under orbit_session_token, one JSON application ping and a single receive item classified INVALID_OR_OVERSIZED, followed by CONNECTION_CLOSED_OR_ERROR. No recognized server JSON application event was captured or controller command sent.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE WEBSOCKET TRANSPORT OBSERVATION",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "The diagnostic combined several invalid-frame and closing causes; it did not establish an accepted application authentication, subscription, credential rejection, valid pong or server close code.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    },
+    {
+      "id": "API-EV-073",
+      "summary": "API-5E/E2b performed a separate fixed-scope frame-level check on November 2, 2026. One frame was classified as CLOSE with EMPTY payload after a JSON application ping. No recognizable RFC 6455 close code was available. Login was reported successful; no valid application event or controller control message was observed.",
+      "summary_extraction": "PUB2_1_EDITORIAL_CURATED_SANITIZED",
+      "classification": "OPERATOR-REPORTED BOUNDED LIVE WEBSOCKET FRAME DIAGNOSTIC",
+      "classification_method": "EDITORIAL_VERIFIED_AGAINST_PRIVATE_LEDGER",
+      "limits": "This was a distinct invocation from API-EV-072, not proof that the earlier invalid receive item was the same frame. Application authentication, device subscription, close reason and server event schema remain unverified. The frozen full model was not promoted based on this transport diagnostic.",
+      "public_source_pins": [],
+      "editorial_review_required": false,
+      "complete_private_record_republished": false,
+      "operation_refs": [],
+      "pub2_1_edited": true
+    }
+  ]
+}
